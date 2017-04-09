@@ -1,0 +1,15 @@
+s3m: c:\tools\viewer\sound\dmp.exe -c2 -i5 -d3 -p220 -z50 !
+mod: c:\tools\viewer\sound\dmp.exe -c2 -i5 -d3 -p220 -z50 !
+asm: tasm !.! /m
+rar: rar !.!
+pas: bp !.!
+MID: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+VOC: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+RMI: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+XMI: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+SND: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+HSC: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+bak: del *.bak
+RAW: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+WAV: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
+SMP: C:\TOOLS\VIEWER\SOUND\PLAYSND.COM !.!
