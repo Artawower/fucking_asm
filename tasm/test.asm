@@ -4,17 +4,27 @@ start:
 mov ax, data
 mov ds, ax
 mov ax, 0
-mov ax, word ptr [x]
-sub ax, word ptr [y]
-add ax, word ptr [z]
+mov ax, 10d
+sub ax, 5d
+add ax, 100d
 mov dx, ax
+
+hello db 'Hello!$'
+mov ah, 9
+mov dx,OFFSET hello
+int 21h
+mov ax, 4c00h
+int 21h
 code ends
 
 data Segment
-x dw 100d
-y dw 110d
-z dd 230d
+x dd 24d
+y dd 1d
+z dw 40d
 Result dw
+
+; Msg db 13,10,'Enter:'
+; Chr db '0 ', '$'
 data ends
 
 stek segment stack

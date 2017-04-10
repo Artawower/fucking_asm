@@ -1,0 +1,66 @@
+Turbo Assembler	 Version 4.1	    04/09/17 22:50:40	    Page 1
+td_learn.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds:data, ss: stek
+      3	0000  B8 0000s		     start: mov	ax, data
+      4	0003  8E D8		     mov ds, ax
+      5	0005  A1 0000r		     mov ax,word ptr [X] ; первая	часть
+      6	0008  8B 1E 0004r	     mov bx,[Y]
+      7	000C  03 C3		     add ax,bx
+      8	000E  A3 0008r		     mov [Result],ax
+      9	0011  A1 0006r		     mov ax,[Y+2]
+     10	0014  13 06 0002r	     adc ax,word ptr [X+2]
+     11	0018  A3 000Ar		     mov [Result+2],ax
+     12	001B  B4 01		     mov ah,1 ;	вторая часть
+     13	001D  CD 21		     int 21h
+     14	001F  A2 0014r		     mov [Chr],al
+     15	0022  B4 09		     mov ah, 9
+     16	0024  BA 000Cr		     mov dx, offset Msg
+     17	0027  CD 21		     int 21h
+     18	0029  B8 4C00		     mov ax, 4c00h
+     19	002C  CD 21		     int 21h
+     20	002E			     code ends
+     21	0000			     data Segment
+     22	0000  00123456		     X dd 123456h ; число 123456h
+     23	0004  FF88 0077		     Y dw 0FF88h,0077h ; число 77FF88h
+     24	0008  0000 0000		     Result dw 0,0 ; результат
+     25	000C  0D 0A 45 6E 74 65	72+  Msg db 13,10,'Enter:'
+     26	      3A
+     27	0014  30 24		     Chr db '0', '$'
+     28	0016			     data ends
+     29	0000			     stek segment stack
+     30	0000  80*(????)		     dw	128 dup	(?)
+     31	0100			     stek ends
+     32				     end Start
+Turbo Assembler	 Version 4.1	    04/09/17 22:50:40	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "04/09/17"
+??FILENAME		Text   "td_learn"
+??TIME			Text   "22:50:39"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #21  #29
+@FILENAME		Text   TD_LEARN
+@WORDSIZE		Text   2			   #1  #21  #29
+CHR			Byte   DATA:0014		   14  #27
+MSG			Byte   DATA:000C		   16  #25
+RESULT			Word   DATA:0008		   8  11  #24
+START			Near   CODE:0000		   #3  32
+X			Dword  DATA:0000		   5  10  #22
+Y			Word   DATA:0004		   6  9	 #23
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  002E Para	none		   #1  2
+DATA			16  0016 Para	none		   2  3	 #21
+STEK			16  0100 Para	Stack		   2  #29
+
