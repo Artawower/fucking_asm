@@ -1,0 +1,65 @@
+Turbo Assembler	 Version 4.1	    04/23/17 22:18:11	    Page 1
+eugen_2.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds:data, ss: stek
+      3	0000			     start:
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6	0005  A1 0000r		       mov ax, word ptr	[x]
+      7	0008  03 06 0004r	       add ax, word ptr	[y]
+      8	000C  03 06 0008r	       add ax, word ptr	[z]
+      9	0010  8B D0		       mov dx, ax
+     10
+     11	0012  B8 4C00		       mov ax, 4c00h
+     12	0015  CD 21		       int 21h
+     13	0017			     code ends
+     14
+     15	0000			     data Segment
+     16	0000  00000014		       x dd 20d
+     17	0004  000003D4		       y dd 980d
+     18	0008  0000000A		       z dd 10d
+     19	000C  ????		     Result dw
+*Warning* eugen_2.asm(19) Missing operand - trailing ? assumed
+     20	000E			     data ends
+     21
+     22	0000			     stek segment stack
+     23	0000  80*(????)		     dw	128 dup	(?)
+     24	0100			     stek ends
+     25				     end Start
+Turbo Assembler	 Version 4.1	    04/23/17 22:18:11	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "04/23/17"
+??FILENAME		Text   "eugen_2	"
+??TIME			Text   "22:18:11"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #15  #22
+@FILENAME		Text   EUGEN_2
+@WORDSIZE		Text   2			   #1  #15  #22
+RESULT			Word   DATA:000C		   #19
+START			Near   CODE:0000		   #3  25
+X			Dword  DATA:0000		   6  #16
+Y			Dword  DATA:0004		   7  #17
+Z			Dword  DATA:0008		   8  #18
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0017 Para	none		   #1  2
+DATA			16  000E Para	none		   2  4	 #15
+STEK			16  0100 Para	Stack		   2  #22
+Turbo Assembler	 Version 4.1	    04/23/17 22:18:11	    Page 3
+Error Summary
+
+
+
+*Warning* eugen_2.asm(19) Missing operand - trailing ? assumed
+
