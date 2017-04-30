@@ -1,0 +1,183 @@
+Turbo Assembler	 Version 4.1	    04/30/17 03:17:49	    Page 1
+lb3t1.asm
+
+
+
+      1				     public InputInt, OutputMsg, Eq_2_numbers
+      2	0000			     code segment
+      3				     assume cs:	code, ds:data, ss: stek
+      4
+      5	0000			     InputInt proc near
+      6				       ;вывод в ax
+      7	0000  53		       push bx
+      8	0001  51		       push cx
+      9	0002  52		       push dx
+     10	0003  56		       push si
+     11	0004  BA 0010r		       mov dx,offset strdsc
+     12	0007  B4 0A		       mov ah,0Ah
+     13	0009  CD 21		       int 21h
+     14	000B  B2 0A		       mov dl,0Ah
+     15	000D  B4 02		       mov ah,2
+     16	000F  CD 21		       int 21h
+     17	0011  33 C0		       xor ax,ax
+     18	0013  33 C9		       xor cx,cx
+     19	0015  8A 0E 0011r	       mov cl,[strdsc+1]
+     20	0019  BE 0012r		       mov si,offset strbuf
+     21	001C  BB 000A		       mov bx,10
+     22	001F			     s1:
+     23	001F  F7 E3		       mul bx
+     24	0021  8A 14		       mov dl,[si]
+     25	0023  46		       inc si
+     26	0024  80 EA 30		       sub dl,30h
+     27	0027  03 C2		       add ax,dx
+     28	0029  E2 F4		       loop s1
+     29	002B  5E		       pop si
+     30	002C  5A		       pop dx
+     31	002D  59		       pop cx
+     32	002E  5B		       pop bx
+     33	002F  C3		       ret
+     34	0030			     InputInt  endp
+     35
+     36	0030			     OutputMsg proc near
+     37				     ; поместить строку в dx
+     38	0030  B4 09		     mov ah, 9
+     39	0032  CD 21		     int 21h
+     40	0034  C3		     ret
+     41	0035			     OutputMsg endp
+     42
+     43	0035			     Eq_2_numbers proc near
+     44				     ; число 1 - ax
+     45				     ; число 2 - dx
+     46
+     47	0035  2B C1		     sub ax, cx
+     48	0037  B8 0000		     mov ax, 0
+     49	003A  79 2B		     jns bg2
+     50	003C  78 1D		     js	bg1
+     51	003E  C3		     ret
+     52	003F			     Eq_2_numbers  endp
+     53
+     54	003F			     start:
+     55	003F  B8 0000s		       mov ax, data
+     56	0042  8E D8		       mov ds, ax
+     57	0044  BA 0018r		       mov dx, offset Msg1
+Turbo Assembler	 Version 4.1	    04/30/17 03:17:49	    Page 2
+lb3t1.asm
+
+
+
+     58	0047  E8 FFE6		       call OutputMsg
+     59	004A  E8 FFB3		       call InputInt
+     60	004D  8B C8		       mov cx, ax
+     61	004F  BA 003Ar		       mov dx, offset Msg2
+     62	0052  E8 FFDB		       call OutputMsg
+     63	0055  E8 FFA8		       call InputInt
+     64	0058  E8 FFDA		       call Eq_2_numbers
+     65
+     66
+     67	005B			     bg1:
+     68	005B  BA 005Dr			 mov dx, offset	Bigger1
+     69	005E  B4 09			 mov ah, 9
+     70	0060  CD 21			 int 21h
+     71	0062  B8 4C00			 mov ax, 4c00h
+     72	0065  CD 21			 int 21h
+     73	0067			     bg2:
+     74	0067  BA 0086r			 mov dx, offset	Bigger2
+     75	006A  B4 09			 mov ah, 9
+     76	006C  CD 21			 int 21h
+     77	006E  B8 4C00			 mov ax, 4c00h
+     78	0071  CD 21			 int 21h
+     79
+     80
+     81	0073			     code ends
+     82
+     83	0000			     data Segment
+     84	0000  ????????????????	       str_number dq
+*Warning* lb3t1.asm(84)	Missing	operand	- trailing ? assumed
+     85	0008  0064		       x	  dw 100d
+     86	000A  006E		       y	  dw 110d
+     87	000C  000000E6		       z	  dd 230d
+     88	0010  06 00		       strdsc	  db 6,	0
+     89	0012  06*(??)		       strbuf	  db 6 dup (?)
+     90	0018  50 6C 73 20 69 6E	70+    Msg1	  db 'Pls input	the first(1) number: ',	13,10,'$'
+     91	      75 74 20 74 68 65	20+
+     92	      66 69 72 73 74 28	31+
+     93	      29 20 6E 75 6D 62	65+
+     94	      72 3A 20 0D 0A 24
+     95	003A  50 6C 73 20 69 6E	70+    Msg2	  db 'Pls input	the second(2) number: ', 13,10,'$'
+     96	      75 74 20 74 68 65	20+
+     97	      73 65 63 6F 6E 64	28+
+     98	      32 29 20 6E 75 6D	62+
+     99	      65 72 3A 20 0D 0A	24
+    100	005D  54 68 65 20 66 69	72+    bigger1	  db 'The first	number is bigger the second ', 13,10,'$'
+    101	      73 74 20 6E 75 6D	62+
+    102	      65 72 20 69 73 20	62+
+    103	      69 67 67 65 72 20	74+
+    104	      68 65 20 73 65 63	6F+
+    105	      6E 64 20 0D 0A 24
+    106	0086  54 68 65 20 73 65	63+    bigger2	  db 'The second number	is bigger then first', 13,10,'$'
+    107	      6F 6E 64 20 6E 75	6D+
+    108	      62 65 72 20 69 73	20+
+    109	      62 69 67 67 65 72	20+
+    110	      74 68 65 6E 20 66	69+
+    111	      72 73 74 0D 0A 24
+    112	00AF  ????		     Result dw
+*Warning* lb3t1.asm(94)	Missing	operand	- trailing ? assumed
+Turbo Assembler	 Version 4.1	    04/30/17 03:17:49	    Page 3
+lb3t1.asm
+
+
+
+    113	00B1			     data ends
+    114
+    115	0000			     stek segment stack
+    116	0000  80*(????)		       dw 128 dup (?)
+    117	0100			     stek ends
+    118				     end Start
+Turbo Assembler	 Version 4.1	    04/30/17 03:17:49	    Page 4
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "04/30/17"
+??FILENAME		Text   "lb3t1	"
+??TIME			Text   "03:17:49"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #2  #83  #115
+@FILENAME		Text   LB3T1
+@WORDSIZE		Text   2			   #2  #83  #115
+BG1			Near   CODE:005B		   50  #67
+BG2			Near   CODE:0067		   49  #73
+BIGGER1			Byte   DATA:005D		   68  #100
+BIGGER2			Byte   DATA:0086		   74  #106
+EQ_2_NUMBERS		Near   CODE:0035		   1  #43  64
+INPUTINT		Near   CODE:0000		   1  #5  59  63
+MSG1			Byte   DATA:0018		   57  #90
+MSG2			Byte   DATA:003A		   61  #95
+OUTPUTMSG		Near   CODE:0030		   1  #36  58  62
+RESULT			Word   DATA:00AF		   #112
+S1			Near   CODE:001F		   #22	28
+START			Near   CODE:003F		   #54	118
+STRBUF			Byte   DATA:0012		   20  #89
+STRDSC			Byte   DATA:0010		   11  19  #88
+STR_NUMBER		Qword  DATA:0000		   #84
+X			Word   DATA:0008		   #85
+Y			Word   DATA:000A		   #86
+Z			Dword  DATA:000C		   #87
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0073 Para	none		   #2  3
+DATA			16  00B1 Para	none		   3  55  #83
+STEK			16  0100 Para	Stack		   3  #115
+Turbo Assembler	 Version 4.1	    04/30/17 03:17:49	    Page 5
+Error Summary
+
+
+
+*Warning* lb3t1.asm(84)	Missing	operand	- trailing ? assumed
+*Warning* lb3t1.asm(94)	Missing	operand	- trailing ? assumed
+

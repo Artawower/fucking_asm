@@ -1,9 +1,2 @@
-
- Start  Stop   Length Name               Class
-
- 00000H 00020H 00021H CODE               
- 00030H 00041H 00012H DATA               
- 00050H 0014FH 00100H STEK               
-
-Program entry point at 0000:0014
+Fatal: Bad object file record in lb3_ta~1.asm near module file offset 0x00000000
 
