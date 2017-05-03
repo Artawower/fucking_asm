@@ -1,4 +1,4 @@
-public InputInt, Output, Eq
+public InputInt, print, equal_100
 code segment
 assume cs: code, ds:data, ss: stek
 
@@ -33,41 +33,50 @@ s1:
   ret
 InputInt  endp
 
-Output proc near
+print proc near
 ; поместить строку в dx
 mov ah, 9
 int 21h
 ret
-Output endp
+print endp
 
-Eq proc near
-; число 1 - ax
-; число 2 - dx
-
-mov dx, offset const_thousend
-sub ax, 1000d
-jns bg1
-js bg2
-ret
-Eq  endp
+equal_100 proc near
+; inc sp
+; inc sp
+; pop bx
+; pop ax
+push bp
+mov bp, sp
+mov ax, [bp + 4]
+mov bx, [bp + 6]
+add ax, bx
+cmp ax, 100d
+je yep
+jne nope
+pop bp ;все что тут
+ret    ; никогда не сработает :(
+equal_100 endp
 
 start:
   mov ax, data
   mov ds, ax
-  mov dx, offset Msg
-  call Output
+  lea dx, vvedi
+  call print
   call InputInt
-  call Eq
-
-
-bg1:
-    mov dx, offset da
+  push ax
+  lea dx, vvedi
+  call print
+  call InputInt
+  push ax
+  call equal_100
+yep:
+    lea dx, da
     mov ah, 9
     int 21h
     mov ax, 4c00h
     int 21h
-bg2:
-    mov dx, offset net
+nope:
+    lea dx, net
     mov ah, 9
     int 21h
     mov ax, 4c00h
@@ -77,16 +86,12 @@ bg2:
 code ends
 
 data Segment
-  str_number     dq
-  x              dw 100d
-  y              dw 110d
-  z              dd 230d
   strdsc         db 6, 0
   strbuf         db 6 dup (?)
   const_thousend dw 3E8h
-  Msg           db 'Vvedite 4islo: ', 13,10,'$'
-  da        db 'bolshe 1000 ', 13,10,'$'
-  net       db 'menshe 1000', 13,10,'$'
+  vvedi          db 'chislo dlya x+y == 100?: ', 13,10,'$'
+  da             db 'da', 13,10,'$'
+  net            db 'net', 13,10,'$'
 Result dw
 data ends
 

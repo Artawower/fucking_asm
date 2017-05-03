@@ -1,0 +1,72 @@
+Turbo Assembler	 Version 4.1	    05/03/17 25:52:19	    Page 1
+ksu2.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds:data, ss: stek
+      3	0000			     start:
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6				       ; lea ax, [y]
+      7				       ; lea dx, [z]
+      8	0005  A1 0001r		       mov ax, [y]
+      9	0008  8B 16 0003r	       mov dx, [z]
+     10	000C  03 C2		       add ax, dx
+     11
+     12				       ; lea dx, [x]
+     13	000E  B5 00		       mov ch, 0
+     14	0010  8A 0E 0000r	       mov cl, byte ptr	[x]
+     15				       ; sbb ax, dx
+     16	0014  1B C1		       sbb ax, cx
+     17
+     18	0016  B8 4C00		       mov ax, 4c00h
+     19	0019  CD 21		       int 21h
+     20	001B			     code ends
+     21
+     22	0000			     data Segment
+     23	0000  32		       x db 50d
+     24	0001  0270		       y dw 624d
+     25	0003  012D		       z dw 301d
+     26	0005  ????		     Result dw
+*Warning* ksu2.asm(26) Missing operand - trailing ? assumed
+     27	0007			     data ends
+     28
+     29	0000			     stek segment stack
+     30	0000  80*(????)		     dw	128 dup	(?)
+     31	0100			     stek ends
+     32				     end Start
+Turbo Assembler	 Version 4.1	    05/03/17 25:52:19	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/03/17"
+??FILENAME		Text   "ksu2	"
+??TIME			Text   "25:52:18"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #22  #29
+@FILENAME		Text   KSU2
+@WORDSIZE		Text   2			   #1  #22  #29
+RESULT			Word   DATA:0005		   #26
+START			Near   CODE:0000		   #3  32
+X			Byte   DATA:0000		   14  #23
+Y			Word   DATA:0001		   8  #24
+Z			Word   DATA:0003		   9  #25
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  001B Para	none		   #1  2
+DATA			16  0007 Para	none		   2  4	 #22
+STEK			16  0100 Para	Stack		   2  #29
+Turbo Assembler	 Version 4.1	    05/03/17 25:52:19	    Page 3
+Error Summary
+
+
+
+*Warning* ksu2.asm(26) Missing operand - trailing ? assumed
+
