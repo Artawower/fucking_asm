@@ -1,0 +1,73 @@
+Turbo Assembler	 Version 4.1	    05/12/17 01:30:17	    Page 1
+NORIK.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds:data, ss: stek
+      3	0000			     start:
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6				       ;располовинли число на 2 регистра
+      7	0005  A1 0000r		       mov ax, word ptr	[x]
+      8	0008  8B 1E 0002r	       mov bx, word ptr	[y]
+      9	000C  8B 0E 0004r	       mov cx, word ptr	[z]
+     10	0010  8B 16 0006r	       mov dx, word ptr	[z+2]
+     11
+     12	0014  03 C3		       add ax, bx
+     13	0016  83 D2 00		       adc dx, 0
+     14	0019  03 C8		       add cx, ax
+     15	001B  83 D2 00		       adc dx, 0
+     16
+     17	001E  B8 4C00		       mov ax, 4c00h
+     18	0021  CD 21		       int 21h
+     19	0023			     code ends
+     20
+     21	0000			     data Segment
+     22	0000  0FA0		       x     dw	4000d
+     23	0002  4E20		       y     dw	20000d
+     24	0004  0007A120		       z     dd	500000d
+     25	0008  00000000		       odved dd	(?)
+     26	000C  ????		     Result dw
+*Warning* NORIK.asm(26)	Missing	operand	- trailing ? assumed
+     27	000E			     data ends
+     28
+     29	0000			     stek segment stack
+     30	0000  80*(????)		     dw	128 dup	(?)
+     31	0100			     stek ends
+     32				     end Start
+Turbo Assembler	 Version 4.1	    05/12/17 01:30:17	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/12/17"
+??FILENAME		Text   "NORIK	"
+??TIME			Text   "01:30:17"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #21  #29
+@FILENAME		Text   NORIK
+@WORDSIZE		Text   2			   #1  #21  #29
+ODVED			Dword  DATA:0008		   #25
+RESULT			Word   DATA:000C		   #26
+START			Near   CODE:0000		   #3  32
+X			Word   DATA:0000		   7  #22
+Y			Word   DATA:0002		   8  #23
+Z			Dword  DATA:0004		   9  10  #24
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0023 Para	none		   #1  2
+DATA			16  000E Para	none		   2  4	 #21
+STEK			16  0100 Para	Stack		   2  #29
+Turbo Assembler	 Version 4.1	    05/12/17 01:30:17	    Page 3
+Error Summary
+
+
+
+*Warning* NORIK.asm(26)	Missing	operand	- trailing ? assumed
+

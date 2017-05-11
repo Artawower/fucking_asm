@@ -41,6 +41,7 @@ ret
 OutputMsg endp
 
 min proc near
+pop bx
 pop ax
 pop cx
 sub ax, cx
@@ -52,13 +53,13 @@ min  endp
 start:
   mov ax, data
   mov ds, ax
-  mov dx, offset opt1
+  mov dx, offset opt
   call OutputMsg
   call InputInt
 
   push ax
   ; mov cx, ax
-  mov dx, offset opt2
+  mov dx, offset opt
   call OutputMsg
   call InputInt
   push ax
@@ -86,10 +87,9 @@ data Segment
   z          dd 230d
   strdsc     db 6, 0
   strbuf     db 6 dup (?)
-  opt1       db 'Ввод 1 числа: ', 13,10,'$'
-  opt2       db 'Ввод 2 числа: ', 13,10,'$'
-  min1       db 'Минимальное число - первое', 13,10,'$'
-  min2       db 'Минимальное число - второе', 13,10,'$'
+  opt       db 'VVOD CHISLA: ', 13,10,'$'
+  min1       db 'MIN - 1', 13,10,'$'
+  min2       db 'MIN - 2', 13,10,'$'
 Result dw
 data ends
 

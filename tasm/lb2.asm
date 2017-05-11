@@ -20,9 +20,8 @@ start:
 code ends
 
 data Segment
-  x dw 100d
-  y dw 3000d
-  z dd 7100d
+  x dd 120000d
+  y dd 68000d
 Result dw
 data ends
 

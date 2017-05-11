@@ -1,4 +1,4 @@
-public InputInt, OutputMsg, min
+public InputInt, print, equal_with_0
 code segment
 assume cs: code, ds:data, ss: stek
 
@@ -33,63 +33,52 @@ s1:
   ret
 InputInt  endp
 
-OutputMsg proc near
+print proc near
 ; поместить строку в dx
 mov ah, 9
 int 21h
 ret
-OutputMsg endp
+print endp
 
-min proc near
-pop ax
-pop cx
-sub ax, cx
-jns bg2
-js bg1
-ret
-min  endp
+equal_with_0 proc near
+;в ax хранится сравнения
+mov dx, [tmp]
+cmp dx, 0d
+je yep
+jne nope
+equal_with_0 endp
 
 start:
   mov ax, data
   mov ds, ax
-  mov dx, offset opt1
-  call OutputMsg
+  lea dx, vvedi
+  call print
   call InputInt
-
-  push ax
-  ; mov cx, ax
-  mov dx, offset opt2
-  call OutputMsg
-  call InputInt
-  push ax
-  call min
-
-
-bg1:
-    mov dx, offset min1
+  mov [tmp], ax
+  call equal_with_0
+yep:
+    lea dx, da
     mov ah, 9
     int 21h
     mov ax, 4c00h
     int 21h
-bg2:
-    mov dx, offset min2
+nope:
+    lea dx, net
     mov ah, 9
     int 21h
     mov ax, 4c00h
     int 21h
+
+
 code ends
 
 data Segment
-  str_number dq
-  x          dw 100d
-  y          dw 110d
-  z          dd 230d
-  strdsc     db 6, 0
-  strbuf     db 6 dup (?)
-  opt1       db 'Ввод 1 числа: ', 13,10,'$'
-  opt2       db 'Ввод 2 числа: ', 13,10,'$'
-  min1       db 'Минимальное число - первое', 13,10,'$'
-  min2       db 'Минимальное число - второе', 13,10,'$'
+  strdsc         db 6, 0
+  strbuf         db 6 dup (?)
+  tmp            dw (?)
+  vvedi          db 'ravno li 0?: ', 13,10,'$'
+  da             db 'da', 13,10,'$'
+  net            db 'net', 13,10,'$'
 Result dw
 data ends
 

@@ -1,0 +1,72 @@
+Turbo Assembler	 Version 4.1	    05/06/17 01:15:30	    Page 1
+mis2.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds:data, ss: stek
+      3	0000			     start:
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6				       ;располовинли число на 2 регистра
+      7	0005  A1 0000r		       mov ax, word ptr	[x]
+      8	0008  8B 1E 0002r	       mov bx, word ptr	[x+2]
+      9	000C  8B 0E 0004r	       mov cx, word ptr	[y]
+     10	0010  8B 16 0006r	       mov dx, word ptr	[y+2]
+     11
+     12	0014  2B DA		       sub bx, dx
+     13	0016  1B C1		       sbb ax, cx
+     14
+     15	0018  A3 0008r		       mov word	ptr [odved], ax
+     16	001B  89 1E 000Ar	       mov word	ptr [odved+2], bx
+     17
+     18	001F  B8 4C00		       mov ax, 4c00h
+     19	0022  CD 21		       int 21h
+     20	0024			     code ends
+     21
+     22	0000			     data Segment
+     23	0000  02625A5A		       x     dd	40000090d
+     24	0004  01312D50		       y     dd	20000080d
+     25	0008  00000000		       odved dd	(?)
+     26	000C  ????		     Result dw
+*Warning* mis2.asm(26) Missing operand - trailing ? assumed
+     27	000E			     data ends
+     28
+     29	0000			     stek segment stack
+     30	0000  80*(????)		     dw	128 dup	(?)
+     31	0100			     stek ends
+     32				     end Start
+Turbo Assembler	 Version 4.1	    05/06/17 01:15:30	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/06/17"
+??FILENAME		Text   "mis2	"
+??TIME			Text   "01:15:30"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #22  #29
+@FILENAME		Text   MIS2
+@WORDSIZE		Text   2			   #1  #22  #29
+ODVED			Dword  DATA:0008		   15  16  #25
+RESULT			Word   DATA:000C		   #26
+START			Near   CODE:0000		   #3  32
+X			Dword  DATA:0000		   7  8	 #23
+Y			Dword  DATA:0004		   9  10  #24
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0024 Para	none		   #1  2
+DATA			16  000E Para	none		   2  4	 #22
+STEK			16  0100 Para	Stack		   2  #29
+Turbo Assembler	 Version 4.1	    05/06/17 01:15:30	    Page 3
+Error Summary
+
+
+
+*Warning* mis2.asm(26) Missing operand - trailing ? assumed
+
