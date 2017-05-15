@@ -1,4 +1,4 @@
-Turbo Assembler	 Version 4.1	    04/09/17 20:53:52	    Page 1
+Turbo Assembler	 Version 4.1	    05/14/17 22:51:38	    Page 1
 lb2.asm
 
 
@@ -6,28 +6,34 @@ lb2.asm
       1	0000			     code segment
       2				     assume cs:	code, ds:data, ss: stek
       3	0000			     start:
-      4	0000  B8 0000s		     mov ax, data
-      5	0003  8E D8		     mov ds, ax
-      6	0005  B8 0000		     mov ax, 0
-      7	0008  A1 0000r		     mov ax, word ptr [x]
-      8	000B  2B 06 0002r	     sub ax, word ptr [y]
-      9	000F  03 06 0004r	     add ax, word ptr [z]
-     10	0013  8B D0		     mov dx, ax
-     11	0015			     code ends
-     12
-     13	0000			     data Segment
-     14	0000  0064		     x dw 100d
-     15	0002  006E		     y dw 110d
-     16	0004  000000E6		     z dd 230d
-     17	0008  ????		     Result dw
-*Warning* lb2.asm(17) Missing operand -	trailing ? assumed
-     18	000A			     data ends
-     19
-     20	0000			     stek segment stack
-     21	0000  80*(????)		     dw	128 dup	(?)
-     22	0100			     stek ends
-     23				     end Start
-Turbo Assembler	 Version 4.1	    04/09/17 20:53:52	    Page 2
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6	0005  B8 0000		       mov ax, 0
+      7	0008  BB 0000		       mov bx, 0
+      8	000B  A0 0001r		       mov al, byte ptr	[y]
+      9	000E  8A 1E 0000r	       mov bl, byte ptr	[x]
+     10	0012  8B 0E 0002r	       mov cx, [z]
+     11
+     12	0016  03 C8		       add cx, ax
+     13	0018  2B CB		       sub cx, bx
+     14
+     15	001A  B8 4C00		       mov ax, 4c00h
+     16	001D  CD 21		       int 21h
+     17	001F			     code ends
+     18
+     19	0000			     data Segment
+     20	0000  F0		       x db 240d
+     21	0001  78		       y db 120d
+     22	0002  012C		       z dw 300d
+     23	0004  ????		     Result dw
+*Warning* lb2.asm(23) Missing operand -	trailing ? assumed
+     24	0006			     data ends
+     25
+     26	0000			     stek segment stack
+     27	0000  80*(????)		     dw	128 dup	(?)
+     28	0100			     stek ends
+     29				     end Start
+Turbo Assembler	 Version 4.1	    05/14/17 22:51:38	    Page 2
 Symbol Table
 
 
@@ -35,29 +41,29 @@ Symbol Table
 
 Symbol Name		Type   Value			   Cref	(defined at #)
 
-??DATE			Text   "04/09/17"
+??DATE			Text   "05/14/17"
 ??FILENAME		Text   "lb2	"
-??TIME			Text   "20:53:52"
+??TIME			Text   "22:51:38"
 ??VERSION		Number 040A
 @CPU			Text   0101H
-@CURSEG			Text   STEK			   #1  #13  #20
+@CURSEG			Text   STEK			   #1  #19  #26
 @FILENAME		Text   LB2
-@WORDSIZE		Text   2			   #1  #13  #20
-RESULT			Word   DATA:0008		   #17
-START			Near   CODE:0000		   #3  23
-X			Word   DATA:0000		   7  #14
-Y			Word   DATA:0002		   8  #15
-Z			Dword  DATA:0004		   9  #16
+@WORDSIZE		Text   2			   #1  #19  #26
+RESULT			Word   DATA:0004		   #23
+START			Near   CODE:0000		   #3  29
+X			Byte   DATA:0000		   9  #20
+Y			Byte   DATA:0001		   8  #21
+Z			Word   DATA:0002		   10  #22
 
 Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
 
-CODE			16  0015 Para	none		   #1  2
-DATA			16  000A Para	none		   2  4	 #13
-STEK			16  0100 Para	Stack		   2  #20
-Turbo Assembler	 Version 4.1	    04/09/17 20:53:52	    Page 3
+CODE			16  001F Para	none		   #1  2
+DATA			16  0006 Para	none		   2  4	 #19
+STEK			16  0100 Para	Stack		   2  #26
+Turbo Assembler	 Version 4.1	    05/14/17 22:51:38	    Page 3
 Error Summary
 
 
 
-*Warning* lb2.asm(17) Missing operand -	trailing ? assumed
+*Warning* lb2.asm(23) Missing operand -	trailing ? assumed
 

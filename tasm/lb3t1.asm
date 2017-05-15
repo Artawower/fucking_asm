@@ -41,8 +41,13 @@ ret
 OutputMsg endp
 
 min proc near
-pop ax
-pop cx
+push bp
+mov bp, sp
+;по ссылке тип
+mov ax, [bp + 4]
+mov cx, [bp + 6]
+; pop ax
+; pop cx
 sub ax, cx
 jns bg2
 js bg1
@@ -86,10 +91,10 @@ data Segment
   z          dd 230d
   strdsc     db 6, 0
   strbuf     db 6 dup (?)
-  opt1       db 'Ввод 1 числа: ', 13,10,'$'
-  opt2       db 'Ввод 2 числа: ', 13,10,'$'
-  min1       db 'Минимальное число - первое', 13,10,'$'
-  min2       db 'Минимальное число - второе', 13,10,'$'
+  opt1       db 'Input first number: ', 13,10,'$'
+  opt2       db 'Input second number: ', 13,10,'$'
+  min1       db 'The first number bigger then two', 13,10,'$'
+  min2       db 'The second number bigger then one', 13,10,'$'
 Result dw
 data ends
 
