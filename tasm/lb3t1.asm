@@ -1,5 +1,7 @@
-public InputInt, OutputMsg, min
-code segment
+extrn min:near
+public InputInt, OutputMsg
+code segment public
+
 assume cs: code, ds:data, ss: stek
 
 InputInt proc near
@@ -33,62 +35,69 @@ s1:
   ret
 InputInt  endp
 
+; min proc near
+;   push bp
+;   mov bp, sp
+;   mov si, [bp + 4]
+;   mov ax, [si]
+;   mov si, [bp + 6]
+;   mov cx, [si]
+;
+;   sub ax, cx
+;   jns bg2
+;   js bg1
+; min  endp
+
 OutputMsg proc near
 ; поместить строку в dx
 mov ah, 9
 int 21h
 ret
 OutputMsg endp
-
-min proc near
-push bp
-mov bp, sp
-;по ссылке тип
-mov ax, [bp + 4]
-mov cx, [bp + 6]
-; pop ax
-; pop cx
-sub ax, cx
-jns bg2
-js bg1
-ret
-min  endp
-
 start:
   mov ax, data
   mov ds, ax
   mov dx, offset opt1
+
   call OutputMsg
   call InputInt
 
+
+  mov tmp1, ax
+  lea ax, tmp1
   push ax
   ; mov cx, ax
   mov dx, offset opt2
   call OutputMsg
   call InputInt
+
+  mov tmp2, ax
+  lea ax, tmp2
   push ax
   call min
 
 
-bg1:
-    mov dx, offset min1
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
-bg2:
-    mov dx, offset min2
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
+; bg1:
+;     mov dx, offset min1
+;     mov ah, 9
+;     int 21h
+;     mov ax, 4c00h
+;     int 21h
+; bg2:
+;     mov dx, offset min2
+;     mov ah, 9
+;     int 21h
+;     mov ax, 4c00h
+;     int 21h
 code ends
 
-data Segment
+data Segment public
   str_number dq
   x          dw 100d
   y          dw 110d
   z          dd 230d
+  tmp1       dw (?)
+  tmp2       dw (?)
   strdsc     db 6, 0
   strbuf     db 6 dup (?)
   opt1       db 'Input first number: ', 13,10,'$'
@@ -98,7 +107,7 @@ data Segment
 Result dw
 data ends
 
-stek segment stack
-  dw 128 dup (?)
+stek segment public
+stack dw 128 dup (?)
 stek ends
 end Start

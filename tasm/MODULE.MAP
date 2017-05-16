@@ -1,0 +1,11 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 00007H 00008H CODE               
+ 00010H 0009BH 0008CH CODE               
+ 000A0H 00133H 00094H DATA               
+ 00140H 0023FH 00100H STEK               
+
+Error: Fixup overflow at CODE:0052, target = KEK in module LB3T1.ASM
+Program entry point at 0001:0049
+

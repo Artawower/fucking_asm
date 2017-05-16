@@ -1,0 +1,87 @@
+Turbo Assembler	 Version 4.1	    05/16/17 03:30:53	    Page 1
+module.asm
+
+
+
+      1				     public min
+      2	0000			     code segment public
+      3				     assume cs:	code, ds: data
+      4	0000			     min proc near
+      5	0000  B8 0000s		       mov ax, data
+      6	0003  8E D8		       mov ds, ax
+      7	0005  33 D2		       xor dx, dx
+      8	0007  55		       push bp
+      9	0008  8B EC		       mov bp, sp
+     10	000A  8B 76 04		       mov si, [bp + 4]
+     11	000D  8B 04		       mov ax, [si]
+     12	000F  8B 76 06		       mov si, [bp + 6]
+     13	0012  8B 0C		       mov cx, [si]
+     14
+     15	0014  2B C1		       sub ax, cx
+     16	0016  79 0E		       jns bg2
+     17	0018  78 00		       js bg1
+     18	001A			       bg1:
+     19	001A  BA 0000r			   mov dx, offset min1
+     20	001D  B4 09			   mov ah, 9
+     21	001F  CD 21			   int 21h
+     22	0021  B8 4C00			   mov ax, 4c00h
+     23	0024  CD 21			   int 21h
+     24	0026			       bg2:
+     25	0026  BA 0023r			   mov dx, offset min2
+     26	0029  B4 09			   mov ah, 9
+     27	002B  CD 21			   int 21h
+     28	002D  B8 4C00			   mov ax, 4c00h
+     29	0030  CD 21			   int 21h
+     30	0032			     min  endp
+     31	0032			     code ends
+     32
+     33	0000			     data Segment public
+     34	0000  54 68 65 20 66 69	72+  min1	db 'The	first number bigger then two', 13,10,'$'
+     35	      73 74 20 6E 75 6D	62+
+     36	      65 72 20 62 69 67	67+
+     37	      65 72 20 74 68 65	6E+
+     38	      20 74 77 6F 0D 0A	24
+     39	0023  54 68 65 20 73 65	63+  min2	db 'The	second number bigger then one',	13,10,'$'
+     40	      6F 6E 64 20 6E 75	6D+
+     41	      62 65 72 20 62 69	67+
+     42	      67 65 72 20 74 68	65+
+     43	      6E 20 6F 6E 65 0D	0A+
+     44	      24
+     45	0047  ????		     Result dw
+*Warning* module.asm(36) Missing operand - trailing ? assumed
+     46	0049			     data ends
+     47				     end
+Turbo Assembler	 Version 4.1	    05/16/17 03:30:53	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/16/17"
+??FILENAME		Text   "module	"
+??TIME			Text   "03:30:53"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #33
+@FILENAME		Text   MODULE
+@WORDSIZE		Text   2			   #2  #33
+BG1			Near   CODE:001A		   17  #18
+BG2			Near   CODE:0026		   16  #24
+MIN			Near   CODE:0000		   1  #4
+MIN1			Byte   DATA:0000		   19  #34
+MIN2			Byte   DATA:0023		   25  #39
+RESULT			Word   DATA:0047		   #45
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0032 Para	Public		   #2  3
+DATA			16  0049 Para	Public		   3  5	 #33
+Turbo Assembler	 Version 4.1	    05/16/17 03:30:53	    Page 3
+Error Summary
+
+
+
+*Warning* module.asm(36) Missing operand - trailing ? assumed
+
