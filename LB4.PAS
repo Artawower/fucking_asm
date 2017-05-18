@@ -5,33 +5,31 @@ asm
   mov cx, length_mas
   les si, ThisMas
   xor bx, bx
-  mov ah, 0
+  xor ax, ax
 
  @main:
     mov al, byte ptr [es:si]
 inc si
     cmp al,0
     or al,al
-
-    // js @m1
     jns @m2
-
-  // @m1:
     inc bx
-  //   loop @main
   @m2:
     loop @main
-
   mov ax, bx
-  ret 
 end;
-
+{$L pascal.obj}
+function find_neg1(var ThisMas :mas; length_mas :integer): byte; near;
+external;
 
 const m : mas = ($5, -$2, $4, -$10, $12, $3, $6, -$2, -$10, -$2);
 var
 count_neg :integer;
 begin
-write('HELLO WORLD');
+writeln('HELLO WORLD');
 count_neg := find_neg(m, 10);
+write(count_neg);
+
+count_neg := find_neg1(m, $8);
 write(count_neg);
 end.
