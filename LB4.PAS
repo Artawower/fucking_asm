@@ -1,4 +1,7 @@
 type mas = array [0..9] of shortint;
+{$L PASCAL1.OBJ}
+function find_neg2(var ThisMas :mas; length_mas :integer): integer; near;
+external;
 
 function find_neg(var ThisMas :mas; length_mas :integer): byte; near; assembler;
 asm
@@ -9,8 +12,7 @@ asm
 
  @main:
     mov al, byte ptr [es:si]
-inc si
-    cmp al,0
+    inc si
     or al,al
     jns @m2
     inc bx
@@ -18,9 +20,11 @@ inc si
     loop @main
   mov ax, bx
 end;
-{$L pascal.obj}
-function find_neg1(var ThisMas :mas; length_mas :integer): byte; near;
+{$L PASCAL.OBJ}
+function find_neg1(var ThisMas :mas; length_mas :integer): integer; near;
 external;
+
+
 
 const m : mas = ($5, -$2, $4, -$10, $12, $3, $6, -$2, -$10, -$2);
 var
@@ -28,8 +32,10 @@ count_neg :integer;
 begin
 writeln('HELLO WORLD');
 count_neg := find_neg(m, 10);
-write(count_neg);
+writeln(count_neg);
 
-count_neg := find_neg1(m, $8);
-write(count_neg);
+count_neg := find_neg1(m, 10);
+writeln(count_neg);
+count_neg := find_neg2(m, 10);
+writeln(count_neg);
 end.
