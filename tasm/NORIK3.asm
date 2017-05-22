@@ -1,5 +1,6 @@
-public InputInt, OutputMsg, min
-code segment
+extrn min:near
+public InputInt, OutputMsg
+code segment public
 assume cs: code, ds:data, ss: stek
 
 InputInt proc near
@@ -40,15 +41,6 @@ int 21h
 ret
 OutputMsg endp
 
-min proc near
-pop bx
-pop ax
-pop cx
-sub ax, cx
-jns bg2
-js bg1
-ret
-min  endp
 
 start:
   mov ax, data
@@ -58,33 +50,15 @@ start:
   call InputInt
 
   push ax
-  ; mov cx, ax
   mov dx, offset opt
   call OutputMsg
   call InputInt
   push ax
   call min
-
-
-bg1:
-    mov dx, offset min1
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
-bg2:
-    mov dx, offset min2
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
 code ends
 
-data Segment
+data Segment public
   str_number dq
-  x          dw 100d
-  y          dw 110d
-  z          dd 230d
   strdsc     db 6, 0
   strbuf     db 6 dup (?)
   opt       db 'VVOD CHISLA: ', 13,10,'$'
@@ -93,7 +67,7 @@ data Segment
 Result dw
 data ends
 
-stek segment stack
-  dw 128 dup (?)
+stek segment public
+stack dw 128 dup (?)
 stek ends
 end Start

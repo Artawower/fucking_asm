@@ -1,0 +1,72 @@
+Turbo Assembler	 Version 4.1	    05/20/17 22:06:34	    Page 1
+PASCAL.ASM
+
+
+
+      1	0000			     .model Large, PASCAL
+      2	0000			     .code
+      3				     public find_neg1
+      4	0000			     find_neg1 proc near ThisMas:dword,	length_mas:word
+1     5	0000  55			     PUSH    BP
+1     6	0001  8B EC			     MOV     BP,SP
+1     7	0003  8B 4E 04		       mov cx, length_mas
+      8	0006  33 DB		       xor bx, bx
+      9	0008  C4 76 06		       les si, ThisMas
+     10	000B  B4 00		       mov ah, 0
+     11	000D			     @main:
+     12	000D  8A 04			 mov al, byte ptr [es:si]
+*Warning* PASCAL.ASM(10) ":" operator ignored
+     13	000F  46			 inc si
+     14	0010  0A C0			 or al,al
+     15	0012  79 01			 jns @m2
+     16	0014  43			 inc bx
+     17	0015			     @m2:
+     18	0015  E2 F6			 loop @main
+     19
+     20	0017  8B C3		       mov ax, bx
+1    21	0019  5D			     POP     BP
+1    22	001A  C2 0006			     RET     00006h
+     23	001D			     find_neg1 endp
+     24				     end
+Turbo Assembler	 Version 4.1	    05/20/17 22:06:34	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/20/17"
+??FILENAME		Text   "PASCAL	"
+??TIME			Text   "22:06:34"
+??VERSION		Number 040A
+@32BIT			Text   0			   #1
+@CODE			Text   PASCAL_TEXT		   #1  #1  #2
+@CODESIZE		Text   1			   #1
+@CPU			Text   0101H
+@CURSEG			Text   PASCAL_TEXT		   #2
+@DATA			Text   DGROUP			   #1
+@DATASIZE		Text   1			   #1
+@FILENAME		Text   PASCAL
+@INTERFACE		Text   004H			   #1
+@M2			Near   PASCAL_TEXT:0015		   15  #17
+@MAIN			Near   PASCAL_TEXT:000D		   #11	18
+@MODEL			Text   5			   #1
+@STACK			Text   DGROUP			   #1
+@WORDSIZE		Text   2			   #2
+FIND_NEG1		Near   PASCAL_TEXT:0000		   3  #4
+LENGTH_MAS		Number [DGROUP:BP+0004]		   #4  7
+THISMAS			Number [DGROUP:BP+0006]		   #4  9
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+DGROUP			Group				   #1  1
+  _DATA			16  0000 Word	Public	DATA	   #1
+PASCAL_TEXT		16  001D Word	Public	CODE	   #1  1  #2  2
+Turbo Assembler	 Version 4.1	    05/20/17 22:06:34	    Page 3
+Error Summary
+
+
+
+*Warning* PASCAL.ASM(10) ":" operator ignored
+

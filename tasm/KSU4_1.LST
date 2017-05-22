@@ -1,0 +1,79 @@
+Turbo Assembler	 Version 4.1	    05/22/17 01:50:34	    Page 1
+KSU4_1.asm
+
+
+
+      1	0000			     .model Large, PASCAL
+      2	0000			     .code
+      3				     public find_first_symbol1
+      4	0000			     find_first_symbol1	proc near mystr:dword, str_length:word,	find_el:byte,
+1     5	0000  55			     PUSH    BP
+1     6	0001  8B EC			     MOV     BP,SP
+1     7	0003  33 DB		     xor bx, bx
+      8	0005  33 C0		     xor ax, ax
+      9	0007  33 D2		     xor dx, dx
+     10	0009  8B 4E 06		     mov cx, str_length
+     11	000C  C4 76 08		     les si, mystr
+     12	000F  8A 56 04		     mov dl, find_el
+     13	0012  46		     inc si
+     14
+     15	0013			     @main:
+     16	0013  8A 04		       mov al, byte ptr	[es:si]
+*Warning* KSU4_1.asm(14) ":" operator ignored
+     17	0015  46		       inc si
+     18	0016  B4 00		       mov ah, 0
+     19	0018  3B C2		       cmp ax, dx
+     20	001A  74 06		       je @m2
+     21	001C  E2 F5		       loop @main
+     22	001E  8B 4E 06		       mov cx, str_length
+     23	0021  41		       inc cx
+     24	0022			     @m2:
+     25	0022  8B 46 06		       mov ax, str_length
+     26	0025  2B C1		       sub ax, cx
+1    27	0027  5D			     POP     BP
+1    28	0028  C2 0008			     RET     00008h
+     29	002B			     find_first_symbol1	endp
+     30				     end
+Turbo Assembler	 Version 4.1	    05/22/17 01:50:34	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/22/17"
+??FILENAME		Text   "KSU4_1	"
+??TIME			Text   "01:50:34"
+??VERSION		Number 040A
+@32BIT			Text   0			   #1
+@CODE			Text   KSU4_1_TEXT		   #1  #1  #2
+@CODESIZE		Text   1			   #1
+@CPU			Text   0101H
+@CURSEG			Text   KSU4_1_TEXT		   #2
+@DATA			Text   DGROUP			   #1
+@DATASIZE		Text   1			   #1
+@FILENAME		Text   KSU4_1
+@INTERFACE		Text   004H			   #1
+@M2			Near   KSU4_1_TEXT:0022		   20  #24
+@MAIN			Near   KSU4_1_TEXT:0013		   #15	21
+@MODEL			Text   5			   #1
+@STACK			Text   DGROUP			   #1
+@WORDSIZE		Text   2			   #2
+FIND_EL			Number [DGROUP:BP+0004]		   #4  12
+FIND_FIRST_SYMBOL1	Near   KSU4_1_TEXT:0000		   3  #4
+MYSTR			Number [DGROUP:BP+0008]		   #4  11
+STR_LENGTH		Number [DGROUP:BP+0006]		   #4  10  22  25
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+DGROUP			Group				   #1  1
+  _DATA			16  0000 Word	Public	DATA	   #1
+KSU4_1_TEXT		16  002B Word	Public	CODE	   #1  1  #2  2
+Turbo Assembler	 Version 4.1	    05/22/17 01:50:34	    Page 3
+Error Summary
+
+
+
+*Warning* KSU4_1.asm(14) ":" operator ignored
+

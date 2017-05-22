@@ -1,0 +1,81 @@
+Turbo Assembler	 Version 4.1	    05/20/17 22:49:36	    Page 1
+Norik3m.asm
+
+
+
+      1				     public min
+      2	0000			     code segment public
+      3				     assume cs:	code, ds: data
+      4	0000			     min proc near
+      5	0000  5B		     pop bx
+      6	0001  58		     pop ax
+      7	0002  59		     pop cx
+      8	0003  2B C1		     sub ax, cx
+      9	0005  79 0F		     jns bg2
+     10	0007  78 01		     js	bg1
+     11	0009  C3		     ret
+     12	000A			     bg1:
+     13	000A  BA 0000r			 mov dx, offset	min1
+     14	000D  B4 09			 mov ah, 9
+     15	000F  CD 21			 int 21h
+     16	0011  B8 4C00			 mov ax, 4c00h
+     17	0014  CD 21			 int 21h
+     18	0016			     bg2:
+     19	0016  BA 0023r			 mov dx, offset	min2
+     20	0019  B4 09			 mov ah, 9
+     21	001B  CD 21			 int 21h
+     22	001D  B8 4C00			 mov ax, 4c00h
+     23	0020  CD 21			 int 21h
+     24	0022			     min  endp
+     25	0022			     code ends
+     26
+     27	0000			     data Segment public
+     28	0000  54 68 65 20 66 69	72+  min1	db 'The	first number bigger then two', 13,10,'$'
+     29	      73 74 20 6E 75 6D	62+
+     30	      65 72 20 62 69 67	67+
+     31	      65 72 20 74 68 65	6E+
+     32	      20 74 77 6F 0D 0A	24
+     33	0023  54 68 65 20 73 65	63+  min2	db 'The	second number bigger then one',	13,10,'$'
+     34	      6F 6E 64 20 6E 75	6D+
+     35	      62 65 72 20 62 69	67+
+     36	      67 65 72 20 74 68	65+
+     37	      6E 20 6F 6E 65 0D	0A+
+     38	      24
+     39	0047  ????		     Result dw
+*Warning* Norik3m.asm(30) Missing operand - trailing ? assumed
+     40	0049			     data ends
+     41				     end
+Turbo Assembler	 Version 4.1	    05/20/17 22:49:36	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/20/17"
+??FILENAME		Text   "Norik3m	"
+??TIME			Text   "22:49:36"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #27
+@FILENAME		Text   NORIK3M
+@WORDSIZE		Text   2			   #2  #27
+BG1			Near   CODE:000A		   10  #12
+BG2			Near   CODE:0016		   9  #18
+MIN			Near   CODE:0000		   1  #4
+MIN1			Byte   DATA:0000		   13  #28
+MIN2			Byte   DATA:0023		   19  #33
+RESULT			Word   DATA:0047		   #39
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0022 Para	Public		   #2  3
+DATA			16  0049 Para	Public		   3  #27
+Turbo Assembler	 Version 4.1	    05/20/17 22:49:36	    Page 3
+Error Summary
+
+
+
+*Warning* Norik3m.asm(30) Missing operand - trailing ? assumed
+
