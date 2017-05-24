@@ -37,7 +37,6 @@ str :string;
 
 
 begin
-writeln('HELLO WORLD');
 str := 'DSASDSriv';
 writeln(find_first_symbol(str, Length(str), 'r' ));
 writeln(find_first_symbol1(str, Length(str), 'r' ));

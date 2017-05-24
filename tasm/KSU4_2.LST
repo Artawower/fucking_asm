@@ -1,0 +1,66 @@
+Turbo Assembler	 Version 4.1	    05/22/17 23:35:52	    Page 1
+ksu4_2.asm
+
+
+
+      1	0000			     code segment byte public
+      2				     assume cs:	code
+      3				     public find_first_symbol2
+      4	0000			     find_first_symbol2	proc near
+      5	0000  55		     push bp
+      6	0001  8B EC		     mov bp, sp
+      7	0003  33 DB		     xor bx, bx
+      8	0005  33 D2		     xor dx, dx
+      9	0007  8B 4E 06		     mov cx, word ptr [bp+6]
+     10	000A  C4 76 08		     les si, dword ptr [bp+8]
+     11	000D  8A 56 04		     mov dl, byte ptr [bp+4]
+     12	0010  46		     inc si
+     13
+     14	0011			     @main:
+     15	0011  8A 04		       mov al, byte ptr	[es:si]
+*Warning* ksu4_2.asm(15) ":" operator ignored
+     16	0013  46		       inc si
+     17	0014  B4 00		       mov ah, 0
+     18	0016  3B C2		       cmp ax, dx
+     19	0018  74 06		       je @m2
+     20	001A  E2 F5		       loop @main
+     21	001C  8B 4E 06		       mov cx, word ptr	[bp+6]
+     22	001F  41		       inc cx
+     23	0020			     @m2:
+     24	0020  8B 46 06		       mov ax, word ptr	[bp+6]
+     25	0023  2B C1		       sub ax, cx
+     26	0025  5D		       pop bp
+     27	0026  C2 0008		       ret 8
+     28	0029			     find_first_symbol2	endp
+     29	0029			     Code ends
+     30				     end
+Turbo Assembler	 Version 4.1	    05/22/17 23:35:52	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/22/17"
+??FILENAME		Text   "ksu4_2	"
+??TIME			Text   "23:35:52"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   CODE			   #1
+@FILENAME		Text   KSU4_2
+@M2			Near   CODE:0020		   19  #23
+@MAIN			Near   CODE:0011		   #14	20
+@WORDSIZE		Text   2			   #1
+FIND_FIRST_SYMBOL2	Near   CODE:0000		   3  #4
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0029 Byte	Public		   #1  2
+Turbo Assembler	 Version 4.1	    05/22/17 23:35:52	    Page 3
+Error Summary
+
+
+
+*Warning* ksu4_2.asm(15) ":" operator ignored
+

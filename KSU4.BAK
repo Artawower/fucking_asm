@@ -1,4 +1,3 @@
-type mas = array [0..9] of shortint;
 function find_first_symbol(var mystr :string; str_length :integer; find_el:char): integer; near; assembler;
 asm
   xor bx, bx
@@ -31,18 +30,19 @@ external;
 
 
 
-const m : mas = ($5, -$2, $4, -$10, $12, $3, $6, -$2, -$10, -$2);
+
 var
 sd, count_neg :integer;
 str :string;
 
+
 begin
 writeln('HELLO WORLD');
 str := 'DSASDSriv';
-writeln(find_first_symbol(str, Length(str), 'S' ));
-writeln(find_first_symbol1(str, Length(str), 'S' ));
-sd = find_first_symbol2(str, Length(str), 'S' );
-{writeln();}
+writeln(find_first_symbol(str, Length(str), 'r' ));
+writeln(find_first_symbol1(str, Length(str), 'r' ));
+sd := find_first_symbol2(str, Length(str), 'r' );
+writeln(sd);
 {count_neg := find_neg(m, 10);
 writeln(count_neg);
 
