@@ -3,16 +3,11 @@ assume cs: code, ds:data, ss: stek
 start:
   mov ax, data
   mov ds, ax
-  ; lea ax, [y]
-  ; lea dx, [z]
   mov ax, [y]
   mov dx, [z]
   add ax, dx
-
-  ; lea dx, [x]
   mov ch, 0
   mov cl, byte ptr [x]
-  ; sbb ax, dx
   sbb ax, cx
 
   mov ax, 4c00h
