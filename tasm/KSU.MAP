@@ -1,2 +1,11 @@
-Fatal: Unable to open file 'ksu.obj'
+
+ Start  Stop   Length Name               Class
+
+ 00000H 00065H 00066H CODE               
+ 00070H 0008CH 0001DH CODE               
+ 00090H 000C6H 00037H DATA               
+ 000D0H 000E7H 00018H DATA               
+ 000F0H 001EFH 00100H STEK               
+
+Program entry point at 0000:0035
 

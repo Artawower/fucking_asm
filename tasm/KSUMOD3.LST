@@ -1,0 +1,65 @@
+Turbo Assembler	 Version 4.1	    05/24/17 14:54:20	    Page 1
+ksumod3.asm
+
+
+
+      1				     public equal_100
+      2	0000			     code segment
+      3				     assume cs:	code
+      4	0000			     equal_100 proc near
+      5	0000  55		       push bp
+      6	0001  8B EC		       mov bp, sp
+      7	0003  8B 76 04		       mov si, [bp + 4]
+      8	0006  8B 04		       mov ax, [si]
+      9	0008  8B 76 06		       mov si, [bp + 6]
+     10	000B  8B 1C		       mov bx, [si]
+     11	000D  03 C3		       add ax, bx
+     12	000F  3D 0064		       cmp ax, 100d
+     13	0012  74 06		       je yes
+     14	0014  BA 0009r		       mov dx, offset msg_nope
+     15	0017  EB 04 90		       jmp blink_point
+     16	001A			       yes:
+     17	001A  BA 0000r			 mov dx, offset	msg_yep
+     18
+     19	001D			       blink_point:
+     20	001D  5D		       pop bp
+     21	001E  C2 0004		       ret 4
+     22	0021			     endp equal_100
+     23	0021			     code ends
+     24
+     25	0000			     data Segment public
+     26	0000  45 71 75 61 6C 21	0D+  msg_yep	   db 'Equal!',	13,10,'$'
+     27	      0A 24
+     28	0009  4E 6F 74 20 45 71	75+  msg_nope	   db 'Not Equal!!1', 13,10,'$'
+     29	      61 6C 21 21 31 0D	0A+
+     30	      24
+     31	0018			     data ends
+     32
+     33				     end
+Turbo Assembler	 Version 4.1	    05/24/17 14:54:20	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/24/17"
+??FILENAME		Text   "ksumod3	"
+??TIME			Text   "14:54:20"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #25
+@FILENAME		Text   KSUMOD3
+@WORDSIZE		Text   2			   #2  #25
+BLINK_POINT		Near   CODE:001D		   15  #19
+EQUAL_100		Near   CODE:0000		   1  #4
+MSG_NOPE		Byte   DATA:0009		   14  #28
+MSG_YEP			Byte   DATA:0000		   17  #26
+YES			Near   CODE:001A		   13  #16
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0021 Para	none		   #2  3
+DATA			16  0018 Para	Public		   #25
+
