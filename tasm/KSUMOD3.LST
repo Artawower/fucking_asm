@@ -1,0 +1,65 @@
+Turbo Assembler	 Version 4.1	    05/25/17 00:37:25	    Page 1
+ksumod3.asm
+
+
+
+      1				     public equal_100
+      2	0000			     code segment
+      3				     assume cs:	code
+      4	0000			     equal_100 proc near
+      5	0000  55		       push bp
+      6	0001  8B EC		       mov bp, sp
+      7	0003  33 D2		       xor dx, dx
+      8	0005  8B 76 04		       mov si, [bp + 4]
+      9	0008  8B 04		       mov ax, [si]
+     10	000A  8B 76 06		       mov si, [bp + 6]
+     11	000D  8B 1C		       mov bx, [si]
+     12	000F  03 C3		       add ax, bx
+     13	0011  3D 0064		       cmp ax, 100d
+     14	0014  74 06		       je yes
+     15	0016  BA 0009r		       mov dx, offset msg_nope
+     16	0019  EB 04 90		       jmp blink_point
+     17	001C			       yes:
+     18	001C  BA 0000r			 mov dx, offset	msg_yep
+     19
+     20	001F			       blink_point:
+     21	001F  5D		       pop bp
+     22	0020  C2 0004		       ret 4
+     23	0023			     endp equal_100
+     24	0023			     code ends
+     25
+     26	0000			     data Segment public
+     27	0000  45 71 75 61 6C 21	0D+  msg_yep	   db 'Equal!',	13,10,'$'
+     28	      0A 24
+     29	0009  4E 6F 74 20 45 71	75+  msg_nope	   db 'Not Equal!', 13,10,'$'
+     30	      61 6C 21 0D 0A 24
+     31	0016			     data ends
+     32
+     33				     end
+Turbo Assembler	 Version 4.1	    05/25/17 00:37:25	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/25/17"
+??FILENAME		Text   "ksumod3	"
+??TIME			Text   "00:37:25"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #26
+@FILENAME		Text   KSUMOD3
+@WORDSIZE		Text   2			   #2  #26
+BLINK_POINT		Near   CODE:001F		   16  #20
+EQUAL_100		Near   CODE:0000		   1  #4
+MSG_NOPE		Byte   DATA:0009		   15  #29
+MSG_YEP			Byte   DATA:0000		   18  #27
+YES			Near   CODE:001C		   14  #17
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0023 Para	none		   #2  3
+DATA			16  0016 Para	Public		   #26
+

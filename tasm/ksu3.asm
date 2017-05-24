@@ -1,4 +1,5 @@
-public InputInt, print, equal_100
+extrn equal_100:near
+public InputInt, print
 code segment
 assume cs: code, ds:data, ss: stek
 
@@ -40,58 +41,41 @@ int 21h
 ret
 print endp
 
-equal_100 proc near
-; inc sp
-; inc sp
-; pop bx
-; pop ax
-push bp
-mov bp, sp
-mov ax, [bp + 4]
-mov bx, [bp + 6]
-add ax, bx
-cmp ax, 100d
-je yep
-jne nope
-pop bp ;все что тут
-ret    ; никогда не сработает :(
-equal_100 endp
-
 start:
   mov ax, data
   mov ds, ax
   lea dx, vvedi
   call print
   call InputInt
+
+  mov tmp1, ax
+  lea ax, tmp1
   push ax
+
   lea dx, vvedi
   call print
   call InputInt
+
+  mov tmp2, ax
+  lea ax, tmp2
   push ax
+
   call equal_100
-yep:
-    lea dx, da
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
-nope:
-    lea dx, net
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
+
+  call print
+  mov ax, 4c00h
+  int 21h
 
 
 code ends
 
-data Segment
+data Segment public
   strdsc         db 6, 0
   strbuf         db 6 dup (?)
   const_thousend dw 3E8h
+  tmp1            dw (?)
+  tmp2            dw (?)
   vvedi          db 'chislo dlya x+y == 100?: ', 13,10,'$'
-  da             db 'da', 13,10,'$'
-  net            db 'net', 13,10,'$'
 Result dw
 data ends
 
@@ -99,3 +83,4 @@ stek segment stack
   dw 128 dup (?)
 stek ends
 end Start
+end
