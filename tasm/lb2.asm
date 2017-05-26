@@ -1,5 +1,5 @@
 code segment
-assume cs: code, ds:data, ss: stek
+assume cs: code, ds: data, ss: stek
 start:
   mov ax, data
   mov ds, ax

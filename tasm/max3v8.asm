@@ -1,6 +1,6 @@
-extrn equal_100:near
+extrn or2:near
 public InputInt, print
-code segment
+code segment public
 assume cs: code, ds:data, ss: stek
 
 InputInt proc near
@@ -44,25 +44,20 @@ print endp
 start:
   mov ax, data
   mov ds, ax
-  lea dx, vvedi
+  lea dx, vvod_1
   call print
   call InputInt
-
-  mov tmp1, ax
-  lea ax, tmp1
   push ax
 
-  lea dx, vvedi
+  lea dx, vvod_2
   call print
   call InputInt
-
-  mov tmp2, ax
-  lea ax, tmp2
   push ax
 
-  call equal_100
+  call or2
 
-  call print
+  mov ah, 9
+  int 21h
   mov ax, 4c00h
   int 21h
 
@@ -72,10 +67,8 @@ code ends
 data Segment public
   strdsc         db 6, 0
   strbuf         db 6 dup (?)
-  const_thousend dw 3E8h
-  tmp1            dw (?)
-  tmp2            dw (?)
-  vvedi          db 'chislo dlya x+y == 100?: ', 13,10,'$'
+  vvod_1          db 'Vvedite 1 4islo: ', 13,10,'$'
+  vvod_2          db 'Vvedite 2 4islo: ', 13,10,'$'
 Result dw
 data ends
 

@@ -1,0 +1,59 @@
+Turbo Assembler	 Version 4.1	    05/26/17 17:43:00	    Page 1
+maxm3v8.asm
+
+
+
+      1				     public or2
+      2	0000			     code segment public
+      3				     assume cs:	code
+      4	0000			     or2 proc near
+      5	0000  55		       push bp
+      6	0001  8B EC		       mov bp, sp
+      7	0003  8B 46 04		       mov ax, [bp+4]
+      8	0006  8B 5E 06		       mov bx, [bp+6]
+      9	0009  0B C3		       or ax, bx
+     10	000B  3D 0000		       cmp ax, 0
+     11	000E  74 06		       je eqv
+     12	0010  BA 0005r		       lea dx, nope
+     13	0013  EB 04 90		       jmp back
+     14	0016			     eqv:
+     15	0016  BA 0000r		       lea dx, yep
+     16
+     17	0019			     back:
+     18	0019  5D		       pop bp
+     19	001A  C2 0004		       ret 4
+     20	001D			     endp or2
+     21	001D			     code ends
+     22
+     23	0000			     data Segment public
+     24	0000  44 61 0D 0A 24	     yep       db 'Da',	13,10,'$'
+     25	0005  4E 65 74 0D 0A 24	     nope      db 'Net', 13,10,'$'
+     26	000B			     data ends
+     27				     end
+Turbo Assembler	 Version 4.1	    05/26/17 17:43:00	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/26/17"
+??FILENAME		Text   "maxm3v8	"
+??TIME			Text   "17:43:00"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #23
+@FILENAME		Text   MAXM3V8
+@WORDSIZE		Text   2			   #2  #23
+BACK			Near   CODE:0019		   13  #17
+EQV			Near   CODE:0016		   11  #14
+NOPE			Byte   DATA:0005		   12  #25
+OR2			Near   CODE:0000		   1  #4
+YEP			Byte   DATA:0000		   15  #24
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  001D Para	Public		   #2  3
+DATA			16  000B Para	Public		   #23
+

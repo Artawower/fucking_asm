@@ -1,0 +1,70 @@
+Turbo Assembler	 Version 4.1	    05/25/17 25:08:16	    Page 1
+max2v8.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds: data,	ss: stek
+      3	0000			     start:
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6				       ; z(dd) + y(db) - x(db)
+      7	0005  B8 0000		       mov ax, 0
+      8	0008  A0 0001r		       mov al, byte ptr	[y]
+      9	000B  8B 1E 0004r	       mov bx, word ptr	[z+2]
+     10	000F  8B 16 0002r	       mov dx, word ptr	[z]
+     11
+     12	0013  03 D8		       add bx, ax
+     13	0015  83 D2 00		       adc dx, 0
+     14
+     15	0018  B8 0000		       mov ax, 0
+     16	001B  A0 0000r		       mov al, byte ptr	[x]
+     17	001E  2B D8		       sub bx, ax
+     18	0020  83 DA 00		       sbb dx, 0
+     19
+     20	0023  89 1E 0007r	       mov word	ptr [result+1],	bx
+     21	0027  89 16 0006r	       mov word	ptr [result], dx
+     22
+     23	002B  B8 4C00		       mov ax, 4c00h
+     24	002E  CD 21		       int 21h
+     25	0030			     code ends
+     26
+     27	0000			     data Segment
+     28	0000  50		     x db 80d
+     29	0001  C8		     y db 200d
+     30	0002  00000190		     z dd 400d
+     31	0006  00000000		     result dd (?)
+     32	000A			     data ends
+     33
+     34	0000			     stek segment stack
+     35	0000  80*(????)		     dw	128 dup	(?)
+     36	0100			     stek ends
+     37				     end start
+Turbo Assembler	 Version 4.1	    05/25/17 25:08:16	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/25/17"
+??FILENAME		Text   "max2v8	"
+??TIME			Text   "25:08:16"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #27  #34
+@FILENAME		Text   MAX2V8
+@WORDSIZE		Text   2			   #1  #27  #34
+RESULT			Dword  DATA:0006		   20  21  #31
+START			Near   CODE:0000		   #3  37
+X			Byte   DATA:0000		   16  #28
+Y			Byte   DATA:0001		   8  #29
+Z			Dword  DATA:0002		   9  10  #30
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0030 Para	none		   #1  2
+DATA			16  000A Para	none		   2  4	 #27
+STEK			16  0100 Para	Stack		   2  #34
+
