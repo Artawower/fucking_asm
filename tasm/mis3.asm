@@ -1,5 +1,6 @@
-public InputInt, print, equal_with_0
-code segment
+extrn equal_with_0:near
+public InputInt, print
+code segment public
 assume cs: code, ds:data, ss: stek
 
 InputInt proc near
@@ -40,13 +41,7 @@ int 21h
 ret
 print endp
 
-equal_with_0 proc near
-;в ax хранится сравнения
-mov dx, [tmp]
-cmp dx, 0d
-je yep
-jne nope
-equal_with_0 endp
+
 
 start:
   mov ax, data
@@ -54,35 +49,27 @@ start:
   lea dx, vvedi
   call print
   call InputInt
-  mov [tmp], ax
+  mov tmp, ax
+  lea ax, tmp
+  push ax
   call equal_with_0
-yep:
-    lea dx, da
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
-nope:
-    lea dx, net
-    mov ah, 9
-    int 21h
-    mov ax, 4c00h
-    int 21h
+  mov ah, 9
+  int 21h
+  mov ax, 4c00h
+  int 21h
 
 
 code ends
 
-data Segment
+data Segment public
   strdsc         db 6, 0
   strbuf         db 6 dup (?)
   tmp            dw (?)
   vvedi          db 'ravno li 0?: ', 13,10,'$'
-  da             db 'da', 13,10,'$'
-  net            db 'net', 13,10,'$'
 Result dw
 data ends
 
-stek segment stack
+stek segment public stack
   dw 128 dup (?)
 stek ends
 end Start

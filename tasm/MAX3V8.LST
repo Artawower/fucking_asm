@@ -1,8 +1,5 @@
 Turbo Assembler	 Version 4.1	    05/26/17 17:33:00	    Page 1
 max3v8.asm
-
-
-
       1				     extrn or2:near
       2				     public InputInt, print
       3	0000			     code segment public
@@ -62,9 +59,6 @@ max3v8.asm
      57	004E  E8 0000e		       call or2
 Turbo Assembler	 Version 4.1	    05/26/17 17:33:00	    Page 2
 max3v8.asm
-
-
-
      58
      59	0051  B4 09		       mov ah, 9
      60	0053  CD 21		       int 21h
@@ -93,12 +87,7 @@ max3v8.asm
      82				     end Start
 Turbo Assembler	 Version 4.1	    05/26/17 17:33:00	    Page 3
 Symbol Table
-
-
-
-
 Symbol Name		Type   Value			   Cref	(defined at #)
-
 ??DATE			Text   "05/26/17"
 ??FILENAME		Text   "max3v8	"
 ??TIME			Text   "17:33:00"
@@ -117,16 +106,11 @@ STRBUF			Byte   DATA:0002		   21  #69
 STRDSC			Byte   DATA:0000		   12  20  #68
 VVOD_1			Byte   DATA:0008		   47  #70
 VVOD_2			Byte   DATA:001C		   52  #73
-
 Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
-
 CODE			16  005A Para	Public		   #3  4
 DATA			16  0032 Para	Public		   4  45  #67
 STEK			16  0100 Para	Stack		   4  #79
 Turbo Assembler	 Version 4.1	    05/26/17 17:33:00	    Page 4
 Error Summary
-
-
-
 *Warning* max3v8.asm(72) Missing operand - trailing ? assumed
 
