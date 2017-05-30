@@ -14,10 +14,10 @@ min proc near
 
   cmp ax, cx
   jg bg2
-  mov dx, offset min1
+  mov dx, offset min2
   jmp min_end
   bg2:
-      mov dx, offset min2
+      mov dx, offset min1
 
   min_end:
   pop bp

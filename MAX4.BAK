@@ -1,0 +1,31 @@
+  type mas = array [0..9] of integer;
+  function find_neg(var ThisMas :mas; length_mas :integer; k :integer): integer; near; assembler;
+  asm
+    mov dx, k
+    mov cx, length_mas
+    les si, ThisMas
+    add si, dx
+    xor bx, bx
+    xor ax, ax
+
+   @main:
+      mov al, byte ptr [es:si]
+      inc si
+      add al, 0
+      jns @m2
+      add, bx, ax
+    @m2:
+      loop @main
+    mov ax, bx
+  end;
+
+
+
+  const m : mas = ($5, -$2, $4, -$10, $12, $3, $6, -$2, -$10, -$2);
+  var
+  count_neg :integer;
+  begin
+  writeln('HELLO WORLD');
+  count_neg := find_neg(m, 10, 4);
+  writeln(count_neg);
+  end.

@@ -1,0 +1,80 @@
+Turbo Assembler	 Version 4.1	    05/31/17 02:09:15	    Page 1
+MAX4_1.asm
+
+
+
+      1	0000			     .model Large, PASCAL
+      2	0000			     .code
+      3				     public find_neg1
+      4	0000			     find_neg1 proc near ThisMas:dword,	length_mas:word, k:word
+1     5	0000  55			     PUSH    BP
+1     6	0001  8B EC			     MOV     BP,SP
+1     7	0003			     @met:
+      8	0003  33 DB		     xor bx, bx
+      9	0005  33 C0		     xor ax, ax
+     10	0007  33 D2		     xor dx, dx
+     11	0009  8B 4E 04		     mov cx, k
+     12	000C  8B 56 06		     mov dx, length_mas
+     13	000F  2B 56 04		     sub dx, k
+     14	0012  03 D2		     add dx, dx
+     15	0014  C4 76 08		     les si, ThisMas
+     16	0017  03 F2		     add si, dx
+     17
+     18	0019			     @main:
+     19	0019  8B 1C		       mov bx, word ptr	[es:si]
+*Warning* MAX4_1.asm(17) ":" operator ignored
+     20	001B  46		       inc si
+     21	001C  46		       inc si
+     22	001D  83 FB 00		       cmp bx, 0
+     23	0020  7D 02		       jnl @m2
+     24	0022  03 C3		       add ax, bx
+     25	0024			     @m2:
+     26	0024  E2 F3		       loop @main
+1    27	0026  5D			     POP     BP
+1    28	0027  C2 0008			     RET     00008h
+     29	002A			     find_neg1 endp
+     30				     end
+Turbo Assembler	 Version 4.1	    05/31/17 02:09:15	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/31/17"
+??FILENAME		Text   "MAX4_1	"
+??TIME			Text   "02:09:15"
+??VERSION		Number 040A
+@32BIT			Text   0			   #1
+@CODE			Text   MAX4_1_TEXT		   #1  #1  #2
+@CODESIZE		Text   1			   #1
+@CPU			Text   0101H
+@CURSEG			Text   MAX4_1_TEXT		   #2
+@DATA			Text   DGROUP			   #1
+@DATASIZE		Text   1			   #1
+@FILENAME		Text   MAX4_1
+@INTERFACE		Text   004H			   #1
+@M2			Near   MAX4_1_TEXT:0024		   23  #25
+@MAIN			Near   MAX4_1_TEXT:0019		   #18	26
+@MET			Near   MAX4_1_TEXT:0003		   #7
+@MODEL			Text   5			   #1
+@STACK			Text   DGROUP			   #1
+@WORDSIZE		Text   2			   #2
+FIND_NEG1		Near   MAX4_1_TEXT:0000		   3  #4
+K			Number [DGROUP:BP+0004]		   #4  11  13
+LENGTH_MAS		Number [DGROUP:BP+0006]		   #4  12
+THISMAS			Number [DGROUP:BP+0008]		   #4  15
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+DGROUP			Group				   #1  1
+  _DATA			16  0000 Word	Public	DATA	   #1
+MAX4_1_TEXT		16  002A Word	Public	CODE	   #1  1  #2  2
+Turbo Assembler	 Version 4.1	    05/31/17 02:09:15	    Page 3
+Error Summary
+
+
+
+*Warning* MAX4_1.asm(17) ":" operator ignored
+

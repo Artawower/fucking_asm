@@ -55,6 +55,11 @@ start:
   call InputInt
   push ax
   call min
+
+  mov ah, 9
+  int 21h
+  mov ax, 4c00h
+  int 21h
 code ends
 
 data Segment public

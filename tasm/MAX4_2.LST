@@ -1,0 +1,66 @@
+Turbo Assembler	 Version 4.1	    05/31/17 02:17:36	    Page 1
+max4_2.asm
+
+
+
+      1	0000			     code segment byte public
+      2				     assume cs:	code
+      3				     public find_neg2
+      4	0000			     find_neg2 proc near
+      5	0000  55		     push bp
+      6	0001  8B EC		     mov bp, sp
+      7	0003  33 DB		     xor bx, bx
+      8	0005  33 C0		     xor ax, ax
+      9	0007  33 D2		     xor dx, dx
+     10	0009  8B 4E 04		     mov cx, word ptr [bp+4]
+     11	000C  8B 56 06		     mov dx, word ptr [bp+6]
+     12	000F  2B 56 04		     sub dx, word ptr [bp+4]
+     13	0012  03 D2		     add dx, dx
+     14	0014  C4 76 08		     les si, dword ptr [bp+8]
+     15	0017  03 F2		     add si, dx
+     16
+     17	0019			     @main:
+     18	0019  8B 1C		       mov bx, word ptr	[es:si]
+*Warning* max4_2.asm(18) ":" operator ignored
+     19	001B  46		       inc si
+     20	001C  46		       inc si
+     21	001D  83 FB 00		       cmp bx, 0
+     22	0020  7D 02		       jnl @m2
+     23	0022  03 C3		       add ax, bx
+     24	0024			     @m2:
+     25	0024  E2 F3		       loop @main
+     26	0026  5D		       pop bp
+     27	0027  C2 0008		       ret 8
+     28	002A			     find_neg2 endp
+     29	002A			     Code ends
+     30				     end
+Turbo Assembler	 Version 4.1	    05/31/17 02:17:36	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/31/17"
+??FILENAME		Text   "max4_2	"
+??TIME			Text   "02:17:36"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   CODE			   #1
+@FILENAME		Text   MAX4_2
+@M2			Near   CODE:0024		   22  #24
+@MAIN			Near   CODE:0019		   #17	25
+@WORDSIZE		Text   2			   #1
+FIND_NEG2		Near   CODE:0000		   3  #4
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  002A Byte	Public		   #1  2
+Turbo Assembler	 Version 4.1	    05/31/17 02:17:36	    Page 3
+Error Summary
+
+
+
+*Warning* max4_2.asm(18) ":" operator ignored
+
