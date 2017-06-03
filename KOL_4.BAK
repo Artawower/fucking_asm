@@ -1,0 +1,29 @@
+  type mas = array [0..9] of byte;
+  function find_max_elem(var massiv :mas; length_mas :byte): byte; near; assembler;
+  asm
+    xor cl, cl
+    mov cl, byte ptr length_mas
+    les si, massiv
+    xor bx, bx
+    xor ax, ax
+    mov al, byte ptr [es:si]
+
+    @main:
+      mov bl, byte ptr[es:si]
+      inc si
+      cmp ax, bx
+      jnb @m2
+      mov ax, bx
+    @m2:
+      loop @main
+    les si, massiv
+    mov al, byte ptr [es:si+4]
+  end;
+
+  const m : mas = (5, 2, 22, 12, 12, 3, 6, 2, 44, 2);
+  var
+  max_elem :integer;
+  begin
+  max_elem := find_max_elem(m, 10);
+  writeln(max_elem);
+  end.

@@ -1,0 +1,61 @@
+Turbo Assembler	 Version 4.1	    06/03/17 21:55:11	    Page 1
+KOL4_2.asm
+
+
+
+      1	0000			     code segment byte public
+      2				     assume cs:	code
+      3				     public find_max_elem_hand
+      4	0000			     find_max_elem_hand	proc near
+      5	0000  55		     push bp
+      6	0001  8B EC		     mov bp, sp
+      7	0003  8B 4E 04		       mov cx, word ptr	[bp + 4]
+      8	0006  C4 76 06		       les si, dword ptr [bp + 6]
+      9	0009  8A 04		       mov al, byte ptr	[es:si]
+*Warning* KOL4_2.asm(9)	":" operator ignored
+     10
+     11	000B			       @main:
+     12	000B  8A 1C			 mov bl, byte ptr[es:si]
+*Warning* KOL4_2.asm(12) ":" operator ignored
+     13	000D  46			 inc si
+     14	000E  3A C3			 cmp al, bl
+     15	0010  7F 02			 jg @m2
+     16	0012  8A C3			 mov al, bl
+     17	0014			       @m2:
+     18	0014  E2 F5			 loop @main
+     19	0016  5D		       pop bp
+     20	0017  C2 0006		       ret 6
+     21	001A			     find_max_elem_hand	endp
+     22	001A			     Code ends
+     23				     end
+Turbo Assembler	 Version 4.1	    06/03/17 21:55:11	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "06/03/17"
+??FILENAME		Text   "KOL4_2	"
+??TIME			Text   "21:55:11"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   CODE			   #1
+@FILENAME		Text   KOL4_2
+@M2			Near   CODE:0014		   15  #17
+@MAIN			Near   CODE:000B		   #11	18
+@WORDSIZE		Text   2			   #1
+FIND_MAX_ELEM_HAND	Near   CODE:0000		   3  #4
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  001A Byte	Public		   #1  2
+Turbo Assembler	 Version 4.1	    06/03/17 21:55:11	    Page 3
+Error Summary
+
+
+
+*Warning* KOL4_2.asm(9)	":" operator ignored
+*Warning* KOL4_2.asm(12) ":" operator ignored
+

@@ -16,22 +16,22 @@
       mov ax, bx
     @m2:
       loop @main
-
-
-
-
   end;
+  {$L NORIK4_1.OBJ}
+  function find_max1(var massiv :mas; length_mas :integer): integer; near;
+  external;
+  {$L NORIK4_2.OBJ}
+  function find_max2(var massiv :mas; length_mas :integer): integer; near;
+  external;
 
-
-  const m : mas = (5, 2, 22, 10, 12, 3, 6, 2, 10, 2);
+  const m : mas = (5, 2, 22, 101, 12, 3, 6, 2, 101, 2);
   var
   max_elem :integer;
   begin
   max_elem := find_max(m, 10);
   writeln(max_elem);
-
-  {count_neg := find_neg1(m, 10);
-  writeln(count_neg);
-  count_neg := find_neg2(m, 10);
-  writeln(count_neg);}
+  max_elem := find_max1(m, 10);
+  writeln(max_elem);
+  max_elem := find_max2(m, 10);
+  writeln(max_elem);
   end.

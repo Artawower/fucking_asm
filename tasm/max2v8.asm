@@ -17,7 +17,7 @@ start:
   sub bx, ax
   sbb dx, 0
 
-  mov word ptr [result+1], bx
+  mov word ptr [result+2], bx
   mov word ptr [result], dx
 
   mov ax, 4c00h

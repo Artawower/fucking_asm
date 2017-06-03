@@ -20,11 +20,9 @@ start:
 code ends
 
 data Segment
-  x     dw 4000d
-  y     dw 200080d
-  z     dd 50d
+  x     dd 4000d
+  y     dd 200080d
   odved dd (?)
-Result dw
 data ends
 
 stek segment stack

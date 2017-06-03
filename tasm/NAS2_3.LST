@@ -1,0 +1,65 @@
+Turbo Assembler	 Version 4.1	    06/03/17 19:17:46	    Page 1
+nas2_3.asm
+
+
+
+      1	0000			     code segment
+      2				     assume cs:	code, ds: data,	ss: stek
+      3	0000			     start:
+      4	0000  B8 0000s		       mov ax, data
+      5	0003  8E D8		       mov ds, ax
+      6	0005  B8 0000		       mov ax, 0
+      7	0008  BB 0000		       mov bx, 0
+      8	000B  A0 0001r		       mov al, byte ptr	[y]
+      9	000E  8A 1E 0000r	       mov bl, byte ptr	[x]
+     10	0012  8B 0E 0002r	       mov cx, [z]
+     11
+     12	0016  03 C3		       add ax, bx
+     13	0018  03 C8		       add cx, ax
+     14	001A  83 D2 00		       adc dx, 0
+     15
+     16	001D  89 0E 0004r	       mov word	ptr [Result], cx
+     17	0021  89 16 0006r	       mov word	ptr [Result + 2], dx
+     18	0025  B8 4C00		       mov ax, 4c00h
+     19	0028  CD 21		       int 21h
+     20	002A			     code ends
+     21
+     22	0000			     data Segment
+     23	0000  F0		       x db 240d
+     24	0001  78		       y db 120d
+     25	0002  0258		       z dw 600d
+     26	0004  00000000		     Result dd(?)
+     27	0008			     data ends
+     28
+     29	0000			     stek segment stack
+     30	0000  80*(????)		     dw	128 dup	(?)
+     31	0100			     stek ends
+     32				     end Start
+Turbo Assembler	 Version 4.1	    06/03/17 19:17:46	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "06/03/17"
+??FILENAME		Text   "nas2_3	"
+??TIME			Text   "19:17:46"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #1  #22  #29
+@FILENAME		Text   NAS2_3
+@WORDSIZE		Text   2			   #1  #22  #29
+RESULT			Dword  DATA:0004		   16  17  #26
+START			Near   CODE:0000		   #3  32
+X			Byte   DATA:0000		   9  #23
+Y			Byte   DATA:0001		   8  #24
+Z			Word   DATA:0002		   10  #25
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  002A Para	none		   #1  2
+DATA			16  0008 Para	none		   2  4	 #22
+STEK			16  0100 Para	Stack		   2  #29
+
