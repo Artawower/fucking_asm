@@ -9,7 +9,7 @@ equal_100 proc near
   mov ax, [bp + 4]
   mov bx, [bp + 6]
   add ax, bx
-  cmp ax, 100d
+  cmp ax, 80d
   je yep
   mov dx, nope
   jmp blink_point
