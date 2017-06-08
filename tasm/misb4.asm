@@ -1,6 +1,6 @@
 public OutputInt
 code segment
-assume cs: code, ds:data, ss: stek
+assume cs: code, es:data, ss: stek
 OutputInt proc near
      push ax
      push bx
@@ -35,21 +35,23 @@ n2:
 start:
   mov ax, data
   mov ds, ax
+  mov es, ax
+
   xor dx, dx
   mov cx, 8
   lea di, es:[massiv]
   xor bx, bx
   mov ax, 11d
+
   cld
 
-m1:
-  scas es:[massiv]
-  jne bli
-  inc bx
-bli:
-  loop m1
-
-  mov ax, bx
+  m1:
+    scasw
+    jne bli
+    inc bx
+  bli:
+    loop m1
+    mov ax, bx
   call OutputInt
   mov dx,offset strend
   mov ah,9
