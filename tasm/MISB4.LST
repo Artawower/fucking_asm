@@ -1,0 +1,123 @@
+Turbo Assembler	 Version 4.1	    06/08/17 03:19:52	    Page 1
+misb4.asm
+
+
+
+      1				     public OutputInt
+      2	0000			     code segment
+      3				     assume cs:	code, ds:data, ss: stek
+      4	0000			     OutputInt proc near
+      5	0000  50			  push ax
+      6	0001  53			  push bx
+      7	0002  51			  push cx
+      8	0003  52			  push dx
+      9	0004  BB 000A			  mov bx, 10
+     10	0007  33 C9			  xor cx,cx
+     11	0009				  n1:
+     12	0009  33 D2			  xor dx,dx
+     13	000B  F7 F3			  div bx
+     14	000D  41			  inc cx
+     15	000E  52			  push dx
+     16	000F  0B C0			  or ax,ax
+     17	0011  75 F6			  jnz n1
+     18	0013  BB 0012r			  mov bx,offset	strbuf
+     19	0016			     n2:
+     20	0016  5A			 pop dx
+     21	0017  80 C2 30			  add dl,30h
+     22	001A  88 17			  mov [bx],dl
+     23	001C  43			  inc bx
+     24	001D  E2 F7			  loop n2
+     25	001F  C6 07 24			  mov byte ptr [bx],'$'
+     26	0022  BA 0012r			  mov dx,offset	strbuf
+     27	0025  B4 09			  mov ah,9
+     28	0027  CD 21			  int 21h
+     29	0029  5A			  pop dx
+     30	002A  59			  pop cx
+     31	002B  5B			  pop bx
+     32	002C  58			  pop ax
+     33	002D  C3			  ret
+     34	002E				  endp OutputInt
+     35	002E			     start:
+     36	002E  B8 0000s		       mov ax, data
+     37	0031  8E D8		       mov ds, ax
+     38	0033  33 D2		       xor dx, dx
+     39	0035  B9 0008		       mov cx, 8
+     40	0038  BF 0000r		       lea di, es:[massiv]
+     41	003B  33 DB		       xor bx, bx
+     42	003D  B8 000B		       mov ax, 11d
+     43	0040  FC		       cld
+     44
+     45	0041			     m1:
+     46	0041  AF		       scasw es:[massiv]
+**Error** misb4.asm(46)	Extra characters on line
+     47	0042  75 01		       jne bli
+     48	0044  43		       inc bx
+     49	0045			     bli:
+     50	0045  E2 FA		       loop m1
+     51
+     52	0047  8B C3		       mov ax, bx
+     53	0049  E8 FFB4		       call OutputInt
+     54	004C  BA 0018r		       mov dx,offset strend
+     55	004F  B4 09		       mov ah,9
+     56	0051  CD 21		       int 21h
+Turbo Assembler	 Version 4.1	    06/08/17 03:19:52	    Page 2
+misb4.asm
+
+
+
+     57
+     58	0053  B8 4C00		       mov ax, 4c00h
+     59	0056  CD 21		       int 21h
+     60	0058			     code ends
+     61
+     62	0000			     data Segment
+     63	0000  000B 000B	0042 0299 +    massiv dw 11d, 11d, 66d,	665d, 66d, 344d, 266d, 5221d
+     64	      0042 0158	010A 1465
+     65	0010  06 00		       strdsc db 6,0
+     66	0012  06*(??)		       strbuf db 6 dup (?)
+     67	0018  0D 0A 24		       strend  db 13,10,'$'
+     68	001B			     data ends
+     69
+     70	0000			     stek segment stack
+     71	0000  80*(????)		     dw	128 dup	(?)
+     72	0100			     stek ends
+     73				     end Start
+Turbo Assembler	 Version 4.1	    06/08/17 03:19:52	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "06/08/17"
+??FILENAME		Text   "misb4	"
+??TIME			Text   "03:19:52"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #2  #62  #70
+@FILENAME		Text   MISB4
+@WORDSIZE		Text   2			   #2  #62  #70
+BLI			Near   CODE:0045		   47  #49
+M1			Near   CODE:0041		   #45	50
+MASSIV			Word   DATA:0000		   40  #63
+N1			Near   CODE:0009		   #11	17
+N2			Near   CODE:0016		   #19	24
+OUTPUTINT		Near   CODE:0000		   1  #4  53
+START			Near   CODE:002E		   #35	73
+STRBUF			Byte   DATA:0012		   18  26  #66
+STRDSC			Byte   DATA:0010		   #65
+STREND			Byte   DATA:0018		   54  #67
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0058 Para	none		   #2  3
+DATA			16  001B Para	none		   3  36  #62
+STEK			16  0100 Para	Stack		   3  #70
+Turbo Assembler	 Version 4.1	    06/08/17 03:19:52	    Page 4
+Error Summary
+
+
+
+**Error** misb4.asm(46)	Extra characters on line
+

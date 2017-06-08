@@ -1,0 +1,62 @@
+Turbo Assembler	 Version 4.1	    06/08/17 00:07:58	    Page 1
+misb4_2.asm
+
+
+
+      1	0000			     code segment byte public
+      2				     assume cs:	code
+      3				     public counting_elem2
+      4	0000			     counting_elem2 proc near
+      5	0000  55		     push bp
+      6	0001  8B EC		     mov bp, sp
+      7
+      8	0003  8B 56 04		     mov dx, [bp+4]
+      9	0006  8B 4E 06		     mov cx, [bp+6]
+     10	0009  C4 76 08		     les si, dword ptr [bp+8]
+     11	000C  BB 0000		     mov bx, 0
+     12
+     13	000F			     @main:
+     14	000F  8B 04		       mov ax, [es:si]
+*Warning* misb4_2.asm(14) ":" operator ignored
+     15	0011  83 C6 02		       add si, 2
+     16	0014  3B C2		       cmp ax, dx
+     17	0016  75 01		       jne @m2
+     18	0018  43		       inc bx
+     19	0019			     @m2:
+     20	0019  E2 F4		       loop @main
+     21	001B  8B C3		     mov ax, bx
+     22	001D  5D		     pop bp
+     23	001E  C2 0008		     ret 8
+     24	0021			     counting_elem2 endp
+     25	0021			     Code ends
+     26				     end
+Turbo Assembler	 Version 4.1	    06/08/17 00:07:58	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "06/08/17"
+??FILENAME		Text   "misb4_2	"
+??TIME			Text   "00:07:58"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   CODE			   #1
+@FILENAME		Text   MISB4_2
+@M2			Near   CODE:0019		   17  #19
+@MAIN			Near   CODE:000F		   #13	20
+@WORDSIZE		Text   2			   #1
+COUNTING_ELEM2		Near   CODE:0000		   3  #4
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0021 Byte	Public		   #1  2
+Turbo Assembler	 Version 4.1	    06/08/17 00:07:58	    Page 3
+Error Summary
+
+
+
+*Warning* misb4_2.asm(14) ":" operator ignored
+

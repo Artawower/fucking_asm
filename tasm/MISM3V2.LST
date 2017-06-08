@@ -1,5 +1,5 @@
-Turbo Assembler	 Version 4.1	    05/26/17 23:06:12	    Page 1
-mism3v2.asm
+Turbo Assembler	 Version 4.1	    06/07/17 21:49:10	    Page 1
+MISM3v2.ASM
 
 
 
@@ -32,7 +32,7 @@ mism3v2.asm
      27	0005  6E 65 74 0D 0A 24	     net	    db 'net', 13,10,'$'
      28	000B			     data ends
      29				     end
-Turbo Assembler	 Version 4.1	    05/26/17 23:06:12	    Page 2
+Turbo Assembler	 Version 4.1	    06/07/17 21:49:10	    Page 2
 Symbol Table
 
 
@@ -40,9 +40,9 @@ Symbol Table
 
 Symbol Name		Type   Value			   Cref	(defined at #)
 
-??DATE			Text   "05/26/17"
-??FILENAME		Text   "mism3v2	"
-??TIME			Text   "23:06:12"
+??DATE			Text   "06/07/17"
+??FILENAME		Text   "MISM3v2	"
+??TIME			Text   "21:49:10"
 ??VERSION		Number 040A
 @CPU			Text   0101H
 @CURSEG			Text   DATA			   #2  #25

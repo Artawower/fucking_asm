@@ -1,5 +1,5 @@
-Turbo Assembler	 Version 4.1	    05/26/17 23:12:24	    Page 1
-mis3.asm
+Turbo Assembler	 Version 4.1	    06/07/17 21:48:49	    Page 1
+MIS3.ASM
 
 
 
@@ -60,8 +60,8 @@ mis3.asm
      55	004A  E8 0000e		       call equal_with_0
      56	004D  B4 09		       mov ah, 9
      57	004F  CD 21		       int 21h
-Turbo Assembler	 Version 4.1	    05/26/17 23:12:24	    Page 2
-mis3.asm
+Turbo Assembler	 Version 4.1	    06/07/17 21:48:49	    Page 2
+MIS3.ASM
 
 
 
@@ -79,14 +79,14 @@ mis3.asm
      69	      69 20 30 3F 3A 20	0D+
      70	      0A 24
      71	001A  ????		     Result dw
-*Warning* mis3.asm(69) Missing operand - trailing ? assumed
+*Warning* MIS3.ASM(69) Missing operand - trailing ? assumed
      72	001C			     data ends
      73
      74	0000			     stek segment public stack
      75	0000  80*(????)		       dw 128 dup (?)
      76	0100			     stek ends
      77				     end Start
-Turbo Assembler	 Version 4.1	    05/26/17 23:12:24	    Page 3
+Turbo Assembler	 Version 4.1	    06/07/17 21:48:49	    Page 3
 Symbol Table
 
 
@@ -94,9 +94,9 @@ Symbol Table
 
 Symbol Name		Type   Value			   Cref	(defined at #)
 
-??DATE			Text   "05/26/17"
-??FILENAME		Text   "mis3	"
-??TIME			Text   "23:12:24"
+??DATE			Text   "06/07/17"
+??FILENAME		Text   "MIS3	"
+??TIME			Text   "21:48:49"
 ??VERSION		Number 040A
 @CPU			Text   0101H
 @CURSEG			Text   STEK			   #3  #64  #74
@@ -118,10 +118,10 @@ Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
 CODE			16  0056 Para	Public		   #3  4
 DATA			16  001C Para	Public		   4  47  #64
 STEK			16  0100 Para	Stack		   4  #74
-Turbo Assembler	 Version 4.1	    05/26/17 23:12:24	    Page 4
+Turbo Assembler	 Version 4.1	    06/07/17 21:48:49	    Page 4
 Error Summary
 
 
 
-*Warning* mis3.asm(69) Missing operand - trailing ? assumed
+*Warning* MIS3.ASM(69) Missing operand - trailing ? assumed
 

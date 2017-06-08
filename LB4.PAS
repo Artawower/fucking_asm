@@ -1,19 +1,21 @@
-  type mas = array [0..9] of shortint;
-  function find_neg(var ThisMas :mas; length_mas :integer): byte; near; assembler;
+  type mas = array [0..9] of integer;
+  function find_neg(var ThisMas :mas; length_mas :integer; elem:integer): integer; near; assembler;
   asm
+    mov dx, elem
     mov cx, length_mas
     les si, ThisMas
-    xor bx, bx
-    xor ax, ax
+    mov bx, 0
 
    @main:
-      mov al, byte ptr [es:si]
-      inc si
-      or al,al
-      jns @m2
-      inc bx
+      mov ax, [es:si]
+      cmp ax, dx
+      je m2
+
+
     @m2:
+      inc bx
       loop @main
+    dex bx
     mov ax, bx
   end;
   {$L PASCAL1.OBJ}
