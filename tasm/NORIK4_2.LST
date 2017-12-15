@@ -1,0 +1,65 @@
+Turbo Assembler	 Version 4.1	    05/25/17 10:55:22	    Page 1
+norik4_2.asm
+
+
+
+      1	0000			     code segment byte public
+      2				     assume cs:	code
+      3				     public find_max2
+      4	0000			     find_max2 proc near
+      5	0000  55		     push bp
+      6	0001  8B EC		     mov bp, sp
+      7
+      8	0003  33 DB		     xor bx, bx
+      9	0005  33 C0		     xor ax, ax
+     10	0007  33 D2		     xor dx, dx
+     11	0009  8B 4E 04		     mov cx, word ptr [bp+4]
+     12	000C  C4 76 06		     les si, dword ptr [bp+6]
+     13
+     14	000F  8A 04		     mov al, byte ptr [es:si]
+*Warning* norik4_2.asm(14) ":" operator	ignored
+     15	0011			     @main:
+     16	0011  8A 1C		       mov bl, byte ptr[es:si]
+*Warning* norik4_2.asm(16) ":" operator	ignored
+     17	0013  46		       inc si
+     18	0014  3B C3		       cmp ax, bx
+     19	0016  73 02		       jnb @m2
+     20	0018  8B C3		       mov ax, bx
+     21	001A			     @m2:
+     22	001A  E2 F5		       loop @main
+     23	001C  5D		       pop bp
+     24	001D  C2 0006		       ret 6
+     25	0020			     find_max2 endp
+     26	0020			     Code ends
+     27				     end
+Turbo Assembler	 Version 4.1	    05/25/17 10:55:22	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/25/17"
+??FILENAME		Text   "norik4_2"
+??TIME			Text   "10:55:22"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   CODE			   #1
+@FILENAME		Text   NORIK4_2
+@M2			Near   CODE:001A		   19  #21
+@MAIN			Near   CODE:0011		   #15	22
+@WORDSIZE		Text   2			   #1
+FIND_MAX2		Near   CODE:0000		   3  #4
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0020 Byte	Public		   #1  2
+Turbo Assembler	 Version 4.1	    05/25/17 10:55:22	    Page 3
+Error Summary
+
+
+
+*Warning* norik4_2.asm(14) ":" operator	ignored
+*Warning* norik4_2.asm(16) ":" operator	ignored
+

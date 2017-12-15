@@ -79,7 +79,7 @@ data Segment public
 Result dw
 data ends
 
-stek segment stack
+stek segment public stack
 dw 128 dup (?)
 stek ends
 end Start

@@ -1,0 +1,77 @@
+Turbo Assembler	 Version 4.1	    05/25/17 10:45:01	    Page 1
+NORIK4_1.ASM
+
+
+
+      1	0000			     .model Large, PASCAL
+      2	0000			     .code
+      3				     public find_max1
+      4	0000			     find_max1 proc near massiv:dword, length:word
+*Warning* NORIK4_1.ASM(4) Reserved word	used as	symbol:	LENGTH
+1     5	0000  55			     PUSH    BP
+1     6	0001  8B EC			     MOV     BP,SP
+1     7	0003  33 DB		     xor bx, bx
+      8	0005  33 C0		     xor ax, ax
+      9	0007  33 D2		     xor dx, dx
+     10	0009  8B 4E 04		     mov cx, length
+     11	000C  C4 76 06		     les si, massiv
+     12
+     13	000F  8A 04		     mov al, byte ptr [es:si]
+*Warning* NORIK4_1.ASM(11) ":" operator	ignored
+     14	0011			     @main:
+     15	0011  8A 1C		       mov bl, byte ptr[es:si]
+*Warning* NORIK4_1.ASM(13) ":" operator	ignored
+     16	0013  46		       inc si
+     17	0014  3B C3		       cmp ax, bx
+     18	0016  73 02		       jnb @m2
+     19	0018  8B C3		       mov ax, bx
+     20	001A			     @m2:
+     21	001A  E2 F5		       loop @main
+1    22	001C  5D			     POP     BP
+1    23	001D  C2 0006			     RET     00006h
+     24	0020			     find_max1 endp
+     25				     end
+Turbo Assembler	 Version 4.1	    05/25/17 10:45:01	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "05/25/17"
+??FILENAME		Text   "NORIK4_1"
+??TIME			Text   "10:45:01"
+??VERSION		Number 040A
+@32BIT			Text   0			   #1
+@CODE			Text   NORIK4_1_TEXT		   #1  #1  #2
+@CODESIZE		Text   1			   #1
+@CPU			Text   0101H
+@CURSEG			Text   NORIK4_1_TEXT		   #2
+@DATA			Text   DGROUP			   #1
+@DATASIZE		Text   1			   #1
+@FILENAME		Text   NORIK4_1
+@INTERFACE		Text   004H			   #1
+@M2			Near   NORIK4_1_TEXT:001A	   18  #20
+@MAIN			Near   NORIK4_1_TEXT:0011	   #14	21
+@MODEL			Text   5			   #1
+@STACK			Text   DGROUP			   #1
+@WORDSIZE		Text   2			   #2
+FIND_MAX1		Near   NORIK4_1_TEXT:0000	   3  #4
+LENGTH			Number [DGROUP:BP+0004]		   #4  10
+MASSIV			Number [DGROUP:BP+0006]		   #4  11
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+DGROUP			Group				   #1  1
+  _DATA			16  0000 Word	Public	DATA	   #1
+NORIK4_1_TEXT		16  0020 Word	Public	CODE	   #1  1  #2  2
+Turbo Assembler	 Version 4.1	    05/25/17 10:45:01	    Page 3
+Error Summary
+
+
+
+*Warning* NORIK4_1.ASM(4) Reserved word	used as	symbol:	LENGTH
+*Warning* NORIK4_1.ASM(11) ":" operator	ignored
+*Warning* NORIK4_1.ASM(13) ":" operator	ignored
+

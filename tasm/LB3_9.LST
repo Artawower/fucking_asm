@@ -1,0 +1,108 @@
+Turbo Assembler	 Version 4.1	    12/15/17 17:30:55	    Page 1
+lb3_9.asm
+
+
+
+      1				     extrn eqv_with_hundred:near
+      2				     public vvod_chisla
+      3	0000			     code segment
+      4				     assume cs:	code, ds:data, ss: stek
+      5
+      6	0000			     vvod_chisla proc near
+      7				       ;вывод в ax
+      8	0000  53		       push bx
+      9	0001  51		       push cx
+     10	0002  52		       push dx
+     11	0003  56		       push si
+     12	0004  BA 0000r		       mov dx,offset strdsc
+     13	0007  B4 0A		       mov ah,0Ah
+     14	0009  CD 21		       int 21h
+     15	000B  B2 0A		       mov dl,0Ah
+     16	000D  B4 02		       mov ah,2
+     17	000F  CD 21		       int 21h
+     18	0011  33 C0		       xor ax,ax
+     19	0013  33 C9		       xor cx,cx
+     20	0015  8A 0E 0001r	       mov cl,[strdsc+1]
+     21	0019  BE 0002r		       mov si,offset strbuf
+     22	001C  BB 000A		       mov bx,10
+     23	001F			     s1:
+     24	001F  F7 E3		       mul bx
+     25	0021  8A 14		       mov dl,[si]
+     26	0023  46		       inc si
+     27	0024  80 EA 30		       sub dl,30h
+     28	0027  03 C2		       add ax,dx
+     29	0029  E2 F4		       loop s1
+     30	002B  5E		       pop si
+     31	002C  5A		       pop dx
+     32	002D  59		       pop cx
+     33	002E  5B		       pop bx
+     34	002F  C3		       ret
+     35	0030			     vvod_chisla  endp
+     36
+     37	0030			     start:
+     38	0030  B8 0000s		       mov ax, data
+     39	0033  8E D8		       mov ds, ax
+     40	0035  BA 0008r		       mov dx, offset vvod
+     41	0038  B4 09		       mov ah, 9
+     42	003A  CD 21		       int 21h
+     43
+     44	003C  E8 FFC1		       call vvod_chisla
+     45	003F  8B F0		       mov si, offset ax
+     46	0041  E8 0000e		       call eqv_with_hundred
+     47
+     48				       ; mov dx, offset	vvod
+     49	0044  B4 09		       mov ah, 9
+     50	0046  CD 21		       int 21h
+     51	0048  B8 4C00		       mov ax, 4c00h
+     52	004B  CD 21		       int 21h
+     53	004D			     code ends
+     54
+     55	0000			     data Segment public
+     56	0000  06 00		       strdsc	  db 6,	0
+     57	0002  06*(??)		       strbuf	  db 6 dup (?)
+Turbo Assembler	 Version 4.1	    12/15/17 17:30:55	    Page 2
+lb3_9.asm
+
+
+
+     58	0008  56 56 4F 44 20 53	52+    vvod	  db 'VVOD SRAVNIVAEMOGO CHISLA: ', 13,10,'$'
+     59	      41 56 4E 49 56 41	45+
+     60	      4D 4F 47 4F 20 43	48+
+     61	      49 53 4C 41 3A 20	0D+
+     62	      0A 24
+     63	0026			     data ends
+     64
+     65	0000			     stek segment public stack
+     66	0000  80*(????)		     dw	128 dup	(?)
+     67	0100			     stek ends
+     68				     end Start
+Turbo Assembler	 Version 4.1	    12/15/17 17:30:55	    Page 3
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "12/15/17"
+??FILENAME		Text   "lb3_9	"
+??TIME			Text   "17:30:55"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #3  #55  #65
+@FILENAME		Text   LB3_9
+@WORDSIZE		Text   2			   #3  #55  #65
+EQV_WITH_HUNDRED	Near   ----:---- Extern		   #1  46
+S1			Near   CODE:001F		   #23	29
+START			Near   CODE:0030		   #37	68
+STRBUF			Byte   DATA:0002		   21  #57
+STRDSC			Byte   DATA:0000		   12  20  #56
+VVOD			Byte   DATA:0008		   40  #58
+VVOD_CHISLA		Near   CODE:0000		   2  #6  44
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  004D Para	none		   #3  4
+DATA			16  0026 Para	Public		   4  38  #55
+STEK			16  0100 Para	Stack		   4  #65
+

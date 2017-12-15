@@ -1,0 +1,9 @@
+
+ Start  Stop   Length Name               Class
+
+ 00000H 0006CH 0006DH CODE               
+ 00070H 000A5H 00036H DATA               
+ 000B0H 001AFH 00100H STEK               
+
+Program entry point at 0000:0050
+

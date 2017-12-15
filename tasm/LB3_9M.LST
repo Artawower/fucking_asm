@@ -1,0 +1,59 @@
+Turbo Assembler	 Version 4.1	    12/15/17 17:30:58	    Page 1
+lb3_9m.asm
+
+
+
+      1				     public eqv_with_hundred
+      2	0000			     code segment public
+      3				     assume cs:	code
+      4
+      5	0000			     eqv_with_hundred proc near
+      6				       ; cmp val in dx
+      7				       ; result	str in dx
+      8				       ; push bp
+      9				       ; mov bp, sp
+     10				       ; mov ax, [bp + 4]
+     11	0000  26: 8B 04		       mov ax, es:[si]
+     12	0003  3D 03E8		       cmp ax, 1000d
+     13	0006  76 06		       jna no
+     14	0008  BA 0000r		       mov dx, offset Da
+     15	000B  EB 04 90		       jmp blink_to_end
+     16	000E			       no:
+     17	000E  BA 0005r			   mov dx, offset Net
+     18	0011			       blink_to_end:
+     19	0011  C3		       ret
+     20	0012			     endp eqv_with_hundred
+     21	0012			     code ends
+     22
+     23	0000			     data Segment public
+     24	0000  44 61 0D 0A 24	     Da	      db 'Da', 13,10,'$'
+     25	0005  4E 65 74 0D 0A 24	     Net       db 'Net', 13,10,'$'
+     26	000B			     data ends
+     27				     end
+Turbo Assembler	 Version 4.1	    12/15/17 17:30:58	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "12/15/17"
+??FILENAME		Text   "lb3_9m	"
+??TIME			Text   "17:30:58"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #23
+@FILENAME		Text   LB3_9M
+@WORDSIZE		Text   2			   #2  #23
+BLINK_TO_END		Near   CODE:0011		   15  #18
+DA			Byte   DATA:0000		   14  #24
+EQV_WITH_HUNDRED	Near   CODE:0000		   1  #5
+NET			Byte   DATA:0005		   17  #25
+NO			Near   CODE:000E		   13  #16
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0012 Para	Public		   #2  3
+DATA			16  000B Para	Public		   #23
+
