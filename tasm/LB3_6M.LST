@@ -1,0 +1,64 @@
+Turbo Assembler	 Version 4.1	    12/18/17 01:09:26	    Page 1
+lb3_6m.asm
+
+
+
+      1				     public neg_check
+      2	0000			     code segment public
+      3				     assume cs:	code
+      4
+      5	0000			     neg_check proc near
+      6	0000  55		       push bp
+      7	0001  8B EC		       mov bp, sp
+      8	0003  8B 76 04		       mov si, [bp + 4]
+      9	0006  8B D6		       mov dx, si
+     10	0008  83 FA 2D		       cmp dx, 45d
+     11	000B  74 06		       je eqv
+     12	000D  BA 0016r		       mov dx, offset f
+     13	0010  EB 04 90		       jmp blink_to_end
+     14	0013			       eqv:
+     15	0013  BA 0000r			   mov dx, offset t
+     16	0016			       blink_to_end:
+     17	0016  5D		       pop bp
+     18	0017  C2 0002		       ret 2
+     19	001A			     endp neg_check
+     20	001A			     code ends
+     21
+     22	0000			     data Segment public
+     23	0000  63 68 69 73 6C 6F	20+  t	     db	'chislo	otricatelnoe', 13,10,'$'
+     24	      6F 74 72 69 63 61	74+
+     25	      65 6C 6E 6F 65 0D	0A+
+     26	      24
+     27	0016  63 68 69 73 6C 6F	20+  f	     db	'chislo	poloshitelnoe',	13,10,'$'
+     28	      70 6F 6C 6F 73 68	69+
+     29	      74 65 6C 6E 6F 65	0D+
+     30	      0A 24
+     31	002D			     data ends
+     32				     end
+Turbo Assembler	 Version 4.1	    12/18/17 01:09:26	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "12/18/17"
+??FILENAME		Text   "lb3_6m	"
+??TIME			Text   "01:09:26"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   DATA			   #2  #22
+@FILENAME		Text   LB3_6M
+@WORDSIZE		Text   2			   #2  #22
+BLINK_TO_END		Near   CODE:0016		   13  #16
+EQV			Near   CODE:0013		   11  #14
+F			Byte   DATA:0016		   12  #27
+NEG_CHECK		Near   CODE:0000		   1  #5
+T			Byte   DATA:0000		   15  #23
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  001A Para	Public		   #2  3
+DATA			16  002D Para	Public		   #22
+

@@ -1,0 +1,78 @@
+Turbo Assembler	 Version 4.1	    12/18/17 01:11:29	    Page 1
+lb3_6.asm
+
+
+
+      1				     extrn neg_check:near
+      2	0000			     code segment
+      3				     assume cs:	code, ds:data, ss: stek
+      4
+      5	0000			     start:
+      6	0000  B8 0000s		       mov ax, data
+      7	0003  8E D8		       mov ds, ax
+      8
+      9	0005  BA 0008r		       mov dx, offset vvod
+     10	0008  B4 09		       mov ah, 9
+     11	000A  CD 21		       int 21h
+     12
+     13	000C  BA 0000r		       mov dx,offset strdsc
+     14	000F  B4 0A		       mov ah,0Ah
+     15	0011  CD 21		       int 21h
+     16	0013  B2 0A		       mov dl,0Ah
+     17	0015  B4 02		       mov ah,2
+     18	0017  CD 21		       int 21h
+     19	0019  33 C9		       xor cx,cx
+     20	001B  8A 0E 0001r	       mov cl,[strdsc+1]
+     21	001F  BE 0002r		       mov si,offset strbuf
+     22
+     23				       ; xor dx, dx
+     24	0022  8A 14		       mov dl, [si]
+     25
+     26	0024  52		       push dx
+     27	0025  E8 0000e		       call neg_check
+     28	0028  B4 09		       mov ah, 9
+     29	002A  CD 21		       int 21h
+     30	002C  B8 4C00		       mov ax, 4c00h
+     31	002F  CD 21		       int 21h
+     32	0031			     code ends
+     33
+     34	0000			     data Segment public
+     35	0000  06 00		       strdsc	  db 6,	0
+     36	0002  06*(??)		       strbuf	  db 6 dup (?)
+     37	0008  56 56 4F 44 20 43	48+    vvod	  db 'VVOD CHISLA: ', 13,10,'$'
+     38	      49 53 4C 41 3A 20	0D+
+     39	      0A 24
+     40	0018			     data ends
+     41
+     42	0000			     stek segment public stack
+     43	0000  0100*(????)	     dw	256 dup	(?)
+     44	0200			     stek ends
+     45				     end Start
+Turbo Assembler	 Version 4.1	    12/18/17 01:11:29	    Page 2
+Symbol Table
+
+
+
+
+Symbol Name		Type   Value			   Cref	(defined at #)
+
+??DATE			Text   "12/18/17"
+??FILENAME		Text   "lb3_6	"
+??TIME			Text   "01:11:29"
+??VERSION		Number 040A
+@CPU			Text   0101H
+@CURSEG			Text   STEK			   #2  #34  #42
+@FILENAME		Text   LB3_6
+@WORDSIZE		Text   2			   #2  #34  #42
+NEG_CHECK		Near   ----:---- Extern		   #1  27
+START			Near   CODE:0000		   #5  45
+STRBUF			Byte   DATA:0002		   21  #36
+STRDSC			Byte   DATA:0000		   13  20  #35
+VVOD			Byte   DATA:0008		   9  #37
+
+Groups & Segments	Bit Size Align	Combine	Class	   Cref	(defined at #)
+
+CODE			16  0031 Para	none		   #2  3
+DATA			16  0018 Para	Public		   3  6	 #34
+STEK			16  0200 Para	Stack		   3  #42
+
